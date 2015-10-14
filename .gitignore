@@ -1,0 +1,6 @@
+#ignore .iml, .DS_Store, .idea file
+*.iml
+*.DS_Store
+*.idea
+#ignore target dir
+target
