@@ -12,9 +12,7 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        if (session.getAttribute("user_reg") == null){
-            resp.sendRedirect("/registration");
-        }else if (session.getAttribute("user_authentication") == null){
+        if (session.getAttribute("user_authentication") == null){
             resp.sendRedirect("/authentication");
         }else {
             req.setAttribute("user", session.getAttribute("user_authentication"));

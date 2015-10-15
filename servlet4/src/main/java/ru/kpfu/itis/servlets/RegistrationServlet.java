@@ -24,9 +24,6 @@ public class RegistrationServlet extends HttpServlet {
         if ((session.getAttribute("user_authenticate") != null)){
             //аутентифицирован, пересылаем на профиль
             resp.sendRedirect("/profile");
-        }else if (session.getAttribute("user_reg") != null){
-            // не аутентифицирован, пересылаем на authentication.jsp
-            resp.sendRedirect("/authentication");
         }else {
             req.getServletContext().getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req,resp);
         }
@@ -36,7 +33,6 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //если сюда попали, то значит не зареган
         HttpSession httpSession = req.getSession();
 
         //вытаскиваем информацию формы
@@ -53,7 +49,6 @@ public class RegistrationServlet extends HttpServlet {
             User user = new User(email,password,sex,subscription);
             try{
                 UserRepository.addUser(user);
-                httpSession.setAttribute("user_reg","ok");
                 resp.sendRedirect("/authentication");
                 return;
             } catch (NotValidPasswordException | NotValidEmailException |

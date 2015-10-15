@@ -17,11 +17,8 @@ public class AuthenticateServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-
-        if (session.getAttribute("user_reg") == null){
-            resp.sendRedirect("/registration");
-        }else if (session.getAttribute("user_authentication") == null){
-            req.getServletContext().getRequestDispatcher("/WEB-INF/views/authentication.jsp").forward(req,resp);
+        if (session.getAttribute("user_authentication") == null){
+            req.getServletContext().getRequestDispatcher("/WEB-INF/views/authentication.jsp").forward(req, resp);
         }else {
             resp.sendRedirect("/profile");
         }

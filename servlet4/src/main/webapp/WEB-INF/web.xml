@@ -4,6 +4,9 @@
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
 
     <servlet>
         <servlet-name>registrationServlet</servlet-name>
@@ -31,6 +34,7 @@
         <servlet-name>authanticateServlet</servlet-name>
         <url-pattern>/authentication</url-pattern>
     </servlet-mapping>
+
 
 
 </web-app>
