@@ -1,4 +1,4 @@
-package ru.kpfu.itis.utilities;
+package ru.kpfu.itis.Utilities;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
@@ -18,7 +18,7 @@ public class Database {
     private static void checkDb(String db) throws DatabaseException {
         File f = new File(getDbFullPath(db));
         if (!f.exists() || !f.isFile() || !f.canRead() || !f.canWrite()) {
-            throw new DatabaseException("database problems");
+            throw new DatabaseException("Database not found");
         }
     }
 

@@ -1,32 +1,21 @@
 package ru.kpfu.itis.entities;
 
-import java.io.Serializable;
-
-public class User implements Serializable {
+public class User {
 
     private String email;
     private String password;
-    private SEX sex;
-    private String subscription;
+    private String sex;
     private String about;
+    private String checkbox;
 
-    public User(String email, String password, SEX sex) {
+    public User(String email, String password, String sex, String checkbox,String about) {
         this.email = email;
         this.password = password;
         this.sex = sex;
-        subscription = "off";
-        about = "";
-    }
-
-    public User(String email, String password, SEX sex, String subscription) {
-        this(email,password,sex);
-        this.subscription = subscription;
-    }
-
-    public User(String email, String password, SEX sex, String subscription, String about) {
-        this(email,password,sex,subscription);
+        this.checkbox = checkbox;
         this.about = about;
     }
+
 
     public String getEmail() {
         return email;
@@ -44,20 +33,20 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public SEX getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(SEX sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
-    public String getSubscription() {
-        return subscription;
+    public String getCheckbox() {
+        return checkbox;
     }
 
-    public void setSubscription(String subscription) {
-        this.subscription = subscription;
+    public void setCheckbox(String checkbox) {
+        this.checkbox = checkbox;
     }
 
     public String getAbout() {
@@ -66,26 +55,5 @@ public class User implements Serializable {
 
     public void setAbout(String about) {
         this.about = about;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        return email.equalsIgnoreCase(user.email);
-
-    }
-
-    @Override
-    public int hashCode() {
-        return email.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return email+", "+password+", "+sex+", "+subscription+", "+about;
     }
 }

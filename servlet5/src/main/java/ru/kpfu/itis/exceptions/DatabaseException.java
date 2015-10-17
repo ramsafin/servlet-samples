@@ -1,6 +1,7 @@
 package ru.kpfu.itis.exceptions;
 
-public class DatabaseException extends Exception {
+public class DatabaseException extends Exception{
+
     public DatabaseException() {
         super();
     }
@@ -15,5 +16,9 @@ public class DatabaseException extends Exception {
 
     public DatabaseException(Throwable cause) {
         super(cause);
+    }
+
+    protected DatabaseException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
     }
 }

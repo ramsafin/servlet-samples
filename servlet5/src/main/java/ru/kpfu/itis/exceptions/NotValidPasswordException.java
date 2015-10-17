@@ -1,6 +1,6 @@
 package ru.kpfu.itis.exceptions;
 
-public class NotValidPasswordException extends Exception {
+public class NotValidPasswordException  extends Exception{
 
     public NotValidPasswordException() {
         super();
@@ -16,5 +16,9 @@ public class NotValidPasswordException extends Exception {
 
     public NotValidPasswordException(Throwable cause) {
         super(cause);
+    }
+
+    protected NotValidPasswordException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
     }
 }

@@ -1,7 +1,40 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
+
+    <servlet>
+        <servlet-name>registrationServlet</servlet-name>
+        <servlet-class>ru.kpfu.itis.servlets.RegistrationServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>profileServlet</servlet-name>
+        <servlet-class>ru.kpfu.itis.servlets.ProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>authanticateServlet</servlet-name>
+        <servlet-class>ru.kpfu.itis.servlets.AuthenticateServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>registrationServlet</servlet-name>
+        <url-pattern>/registration</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>profileServlet</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>authanticateServlet</servlet-name>
+        <url-pattern>/authentication</url-pattern>
+    </servlet-mapping>
+
+
+
 </web-app>
