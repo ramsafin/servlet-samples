@@ -88,14 +88,17 @@ public class UserRepository{
         if (password.length() < 4 || password.length() > 24){
             throw new NotValidPasswordException("Password is not valid: it must contain 4 to 24 symbols");
         }
-        byte letter = 0;
+        byte letters = 0;
         byte digits = 0;
         for (char ch : password.toCharArray()){
             if (Character.isDigit(ch)){
                 digits++;
                 continue;
             }
-            digits++;
+            letters++;
+        }
+        if (digits == 0 || letters == 0){
+            throw new NotValidPasswordException("password is not valid: it must contain letters and digits");
         }
     }
 }
