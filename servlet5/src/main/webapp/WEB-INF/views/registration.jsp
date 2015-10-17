@@ -53,6 +53,11 @@
             text-align: center;
             padding: 15px;
         }
+
+        textarea{
+            width:200px;
+            height: 150px;
+        }
     </style>
 </head>
 <body>
@@ -76,7 +81,9 @@
             <br><br>
             <input class="box" type='checkbox' name='subscription'>&nbsp;&nbsp;Подписаться<br><br>
             <br><br>
-            <input class="in" name="about" type="text" maxlength="50">
+            <p>
+                <textarea maxlength="50" name="about"></textarea>
+            </p>
             <br><br>
             <input class="submit" type='submit' value='отправить'>
         </form>

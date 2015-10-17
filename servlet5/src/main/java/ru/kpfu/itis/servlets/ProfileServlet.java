@@ -23,7 +23,6 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-
         session.setAttribute("user_authentication",null);
         resp.sendRedirect("/authentication");
     }

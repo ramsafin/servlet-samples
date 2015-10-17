@@ -63,8 +63,10 @@
             <br>
 
         </table>
-
-        <p><c:out value="${user.getAbout()}"></c:out></p>
+        <br>
+        <h3>About me</h3>
+        <br>
+        <p><pre><c:out value="${user.getAbout()}"></c:out></pre></p>
 
         <br>
         <br>

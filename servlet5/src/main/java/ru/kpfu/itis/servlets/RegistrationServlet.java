@@ -21,11 +21,11 @@ public class RegistrationServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-        if ((session.getAttribute("user_authenticate") != null)){
-            //аутентифицирован, пересылаем на профиль
-            resp.sendRedirect("/profile");
-        }else {
+        if ((session.getAttribute("user_authenticate") == null)){
             req.getServletContext().getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req,resp);
+        }else if (session.getAttribute("user_profile") != null){
+            //зашел в профиль, пересылаем на профиль
+            resp.sendRedirect("/profile");
         }
 
     }
