@@ -18,5 +18,8 @@
     Task to write 2 servlets
     Registration and Information
     and use JSP
+###servlet4
+    wrtite 3 servlets (authentication, profile, registration)
+    
     
     
