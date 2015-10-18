@@ -20,7 +20,6 @@ public class RegistrationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         if ((session.getAttribute("user_a") == null)){
-            System.out.println(req.getAttribute("user_a"));
             req.getServletContext().getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req,resp);
         }else {
             //зашел в профиль, пересылаем на профиль

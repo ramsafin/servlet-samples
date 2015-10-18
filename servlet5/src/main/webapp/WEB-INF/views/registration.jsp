@@ -54,27 +54,25 @@
     </style>
 
     <script type="text/javascript" language="javascript">
+
+        function validate_form(){
+
+            var reg = /^([a-z0-9_\-]+\.)*[a-z0-9_\-]+@([a-z0-9][a-z0-9\-]*[a-z0-9]\.)+[a-z]{2,6}$/i;
+            if(!reg.test(document.reg_form.email.value)){
+                alert("Некорректный email! Введите еще раз!")
+                return false;
+            }
+            var inp = document.getElementsByName('sex');
+            if (!inp[0].checked && !inp[1].checked) {
+                alert("Выберите свой пол!!!");
+                return false;
+            }
+            return true;
+
+        }
         function count (str) {
             document.getElementById('symb').innerHTML=str.length;
         }
-
-        function validate_form () {
-            var pattern = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
-
-            if (pattern.test(document.getElementById("email")) == false){
-                alert ("not valid email address");
-                valid = false;
-            }
-
-            if (( document.reg_form.sex[0].checked == false ) &&
-                    ( document.reg_form.sex[1].checked == false ) )
-            {
-                alert ("choose your sex");
-                valid = false;
-            }
-            return valid;
-        }
-
 
     </script>
 </head>
@@ -85,7 +83,7 @@
 </div>
 
 <div id="form">
-    <form name="reg_form" onsubmit="validate_form()" class="formInner" action='' method='POST'>
+    <form name="reg_form" onsubmit="return validate_form()" class="formInner" action='' method='POST'>
 
         <input class="in" type='text' name='email'>
         <br>

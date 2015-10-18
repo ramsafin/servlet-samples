@@ -15,8 +15,6 @@ public class ProfileServlet extends HttpServlet {
         if (session.getAttribute("user_a") == null){
             resp.sendRedirect("/authentication");
         }else {
-            System.out.println("attribute user_a in doGet равно");
-            System.out.println(session.getAttribute("user_a"));
             req.setAttribute("user", session.getAttribute("user_a"));
             req.getServletContext().getRequestDispatcher("/WEB-INF/views/profile.jsp").forward(req,resp);
         }
@@ -26,7 +24,6 @@ public class ProfileServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         session.setAttribute("user_a", null);
-        System.out.println(session.getAttribute("user_a")+"  "+"attribute user_a in doPost");
         resp.sendRedirect("/authentication");
     }
 }
