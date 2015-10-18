@@ -5,54 +5,7 @@
 <html>
 <head>
     <meta charset='UTF-8'><title>registration</title>
-    <style>
-        * {
-            margin: 0px;
-            padding: 0px;
-        }
-        body {
-            margin: 0 auto;
-        }
-        #header{
-            text-align: center;
-            width: 100%;
-            height: 80px;
-            padding-top: 20px;
-        }
-        #form{
-            background-color: rgba(0, 0, 0, 0.4);
-            width: 60%;
-            margin-left: 20%;
-            margin-right: 20%;
-            color: black;
-            padding: 20px;
-            height: 100%;
-            font-size: 13pt;
-        }
-        .formInner{
-            width: 60%;
-            margin-right: 20%;
-            margin-left: 35%;
-        }
-
-        .in{
-            height: 20px;
-            width: 190px;
-        }
-        .submit{
-            width: 200px;
-        }
-
-        #message{
-            text-align: center;
-            padding: 15px;
-        }
-        textarea{
-            width:200px;
-            height: 150px;
-        }
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="/registration.css">
     <script type="text/javascript" language="javascript">
 
         function validate_form(){
@@ -71,46 +24,76 @@
 
         }
         function count (str) {
-            document.getElementById('symb').innerHTML=str.length;
+            document.getElementById('symbols').innerHTML=str.length;
         }
 
     </script>
 </head>
 <body>
+    <%--wrapper--%>
+    <div id="wrapper">
 
-<div id="header">
-    <h1>Registration form</h1>
-</div>
+        <%--header of registration form--%>
+        <div id="header">
+            <h1>Registration form</h1>
+        </div>
 
-<div id="form">
-    <form name="reg_form" onsubmit="return validate_form()" class="formInner" action='' method='POST'>
+        <%--my form--%>
+        <div id="formDiv">
 
-        <input class="in" type='text' name='email'>
-        <br>
-        <br>
-        <input class="in" type='password' name='password'><br><br>
+            <form id="form" name="reg_form" class="form_class" onsubmit="return validate_form()" action='' method='POST'>
 
-        <input  type='radio' name='sex' value="male">&nbsp;Мужской
-        &nbsp;&nbsp;&nbsp;
-        <input  type='radio' name='sex' value="female">&nbsp;Женский
+                <%--eamil and password div--%>
+                <div id="email_passwordDiv">
+                    <%--email--%>
+                    <label for="email"><p>Email:</p><input id="email" class="email_class" type='text' name='email'></label>
+                    <br>
+                    <br>
+                    <%--password--%>
+                    <label for="password"><p>Password</p><input id="password" class="email_class" type='password' name='password'></label>
+                </div>
 
-        <br><br>
-        <input class="box" type='checkbox' name='subscription'>&nbsp;&nbsp;Подписаться<br><br>
-        <br><br>
-        <p>
-            <textarea onkeyup="count(value)" maxlength="50" name="about"></textarea>
-        </p>
-        <p>символов <b id="symb">0</b>/50</p>
-        <br><br>
-        <input class="submit" type='submit' value='отправить'>
-    </form>
-</div>
+                <%--radios div--%>
+                <div id="radiosDiv">
+                    <%--radios sex (male and female)--%>
+                    <label for="sex1"><input class="sex_class" id="sex1" type='radio' name='sex' value="male">&nbsp;мужской</label>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label for="sex2"><input class="sex_class" id="sex2" type='radio' name='sex' value="female">&nbsp;женский</label>
+                </div>
 
-<div id="message">
-    <c:if test="${not empty message}">
-        <h3>${message}</h3>
-    </c:if>
-</div>
+                <%--about people div--%>
+                <div id="aboutDiv">
+                    <p>
+                        <label><p>Напишите про себя:</p>
+                            <textarea id="about" onkeyup="count(value)" maxlength="50" name="about"></textarea>
+                        </label>
+                    </p>
+                    <%--counter of symbils in about--%>
+                    <p>символов <b id="symbols">0</b>/<b>50</b></p>
+                </div>
 
+
+                <%--checkbox div--%>
+                <div id="checkboxDiv">
+                    <%--subcribtion--%>
+                    <label for="box"><input id="box" class="box_class" type='checkbox' name='subscription'>&nbsp;подписаться</label>
+                </div>
+
+                <%--submit button--%>
+                <div>
+                    <input class="submit-class" id="submit" type='submit' value='отправить'>
+                </div>
+
+            </form>
+        </div>
+
+        <%--exceptions div--%>
+        <div id="message">
+            <c:if test="${not empty message}">
+                <h3>${message}</h3>
+            </c:if>
+        </div>
+
+    </div>
 </body>
 </html>
