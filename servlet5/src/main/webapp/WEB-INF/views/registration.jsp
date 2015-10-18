@@ -52,6 +52,31 @@
             height: 150px;
         }
     </style>
+
+    <script type="text/javascript" language="javascript">
+        function count (str) {
+            document.getElementById('symb').innerHTML=str.length;
+        }
+
+        function validate_form () {
+            var pattern = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+
+            if (pattern.test(document.getElementById("email")) == false){
+                alert ("not valid email address");
+                valid = false;
+            }
+
+            if (( document.reg_form.sex[0].checked == false ) &&
+                    ( document.reg_form.sex[1].checked == false ) )
+            {
+                alert ("choose your sex");
+                valid = false;
+            }
+            return valid;
+        }
+
+
+    </script>
 </head>
 <body>
 
@@ -60,7 +85,7 @@
 </div>
 
 <div id="form">
-    <form class="formInner" action='' method='POST'>
+    <form name="reg_form" onsubmit="validate_form()" class="formInner" action='' method='POST'>
 
         <input class="in" type='text' name='email'>
         <br>
@@ -75,8 +100,9 @@
         <input class="box" type='checkbox' name='subscription'>&nbsp;&nbsp;Подписаться<br><br>
         <br><br>
         <p>
-            <textarea maxlength="50" name="about"></textarea>
+            <textarea onkeyup="count(value)" maxlength="50" name="about"></textarea>
         </p>
+        <p>символов <b id="symb">0</b>/50</p>
         <br><br>
         <input class="submit" type='submit' value='отправить'>
     </form>
