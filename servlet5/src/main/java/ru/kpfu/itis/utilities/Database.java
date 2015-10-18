@@ -1,4 +1,4 @@
-package ru.kpfu.itis.Utilities;
+package ru.kpfu.itis.utilities;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
@@ -18,7 +18,7 @@ public class Database {
     private static void checkDb(String db) throws DatabaseException {
         File f = new File(getDbFullPath(db));
         if (!f.exists() || !f.isFile() || !f.canRead() || !f.canWrite()) {
-            throw new DatabaseException("Database not found");
+            throw new DatabaseException("Database is not founded");
         }
     }
 
@@ -32,7 +32,7 @@ public class Database {
         try (CSVWriter writer = new CSVWriter(new FileWriter(getDbFullPath(db),true))) {
             writer.writeNext(data);
         } catch (IOException e) {
-            throw new DatabaseException("can't add entry in database!");
+            throw new DatabaseException("can't add entry in database");
         }
     }
 
@@ -41,7 +41,7 @@ public class Database {
         try(CSVReader reader = new CSVReader(new FileReader(getDbFullPath(db)))){
             return reader.readAll();
         } catch (IOException ex) {
-            throw new DatabaseException("can't get all entries from database!");
+            throw new DatabaseException("can't get all entries from database");
         }
     }
 }

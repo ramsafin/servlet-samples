@@ -1,6 +1,6 @@
 package ru.kpfu.itis.exceptions;
 
-public class DuplicateEntryException extends Exception{
+public class DuplicateEntryException extends Exception {
 
     public DuplicateEntryException() {
         super();

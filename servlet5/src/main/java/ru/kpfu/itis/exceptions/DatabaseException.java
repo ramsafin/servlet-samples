@@ -1,6 +1,6 @@
 package ru.kpfu.itis.exceptions;
 
-public class DatabaseException extends Exception{
+public class DatabaseException extends Exception {
 
     public DatabaseException() {
         super();

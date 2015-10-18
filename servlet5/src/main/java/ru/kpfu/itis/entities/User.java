@@ -5,17 +5,16 @@ public class User {
     private String email;
     private String password;
     private String sex;
+    private boolean subscription;
     private String about;
-    private String checkbox;
 
-    public User(String email, String password, String sex, String checkbox,String about) {
+    public User(String email, String password, String sex, boolean subscription, String about) {
         this.email = email;
         this.password = password;
         this.sex = sex;
-        this.checkbox = checkbox;
+        this.subscription = subscription;
         this.about = about;
     }
-
 
     public String getEmail() {
         return email;
@@ -41,12 +40,12 @@ public class User {
         this.sex = sex;
     }
 
-    public String getCheckbox() {
-        return checkbox;
+    public boolean isSubscription() {
+        return subscription;
     }
 
-    public void setCheckbox(String checkbox) {
-        this.checkbox = checkbox;
+    public void setSubscription(boolean subscription) {
+        this.subscription = subscription;
     }
 
     public String getAbout() {
@@ -56,4 +55,5 @@ public class User {
     public void setAbout(String about) {
         this.about = about;
     }
+
 }

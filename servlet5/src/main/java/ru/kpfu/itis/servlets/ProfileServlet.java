@@ -12,10 +12,12 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        if (session.getAttribute("user_authentication") == null){
+        if (session.getAttribute("user_a") == null){
             resp.sendRedirect("/authentication");
         }else {
-            req.setAttribute("user", session.getAttribute("user_authentication"));
+            System.out.println("attribute user_a in doGet равно");
+            System.out.println(session.getAttribute("user_a"));
+            req.setAttribute("user", session.getAttribute("user_a"));
             req.getServletContext().getRequestDispatcher("/WEB-INF/views/profile.jsp").forward(req,resp);
         }
     }
@@ -23,7 +25,8 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        session.setAttribute("user_authentication",null);
+        session.setAttribute("user_a", null);
+        System.out.println(session.getAttribute("user_a")+"  "+"attribute user_a in doPost");
         resp.sendRedirect("/authentication");
     }
 }

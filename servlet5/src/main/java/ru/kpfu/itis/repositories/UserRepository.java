@@ -1,17 +1,17 @@
-package ru.kpfu.itis.repository;
+package ru.kpfu.itis.repositories;
 
-import ru.kpfu.itis.Utilities.Database;
 import ru.kpfu.itis.entities.User;
 import ru.kpfu.itis.exceptions.DatabaseException;
 import ru.kpfu.itis.exceptions.DuplicateEntryException;
 import ru.kpfu.itis.exceptions.NotValidEmailException;
 import ru.kpfu.itis.exceptions.NotValidPasswordException;
+import ru.kpfu.itis.utilities.Database;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class UserRepository{
+public class UserRepository {
 
     private static String repo = "users";
 
@@ -30,12 +30,12 @@ public class UserRepository{
             checkPassword(user.getPassword());
             checkForDuplicates(user);
 
-            Database.addEntry(repo,new String[]{
-                    user.getEmail(),
-                    user.getPassword(),
-                    user.getSex(),
-                    user.getCheckbox(),
-                    trimString(user.getAbout())}
+            Database.addEntry(repo, new String[]{
+                            user.getEmail(),
+                            user.getPassword(),
+                            user.getSex(),
+                            String.valueOf(user.isSubscription()),
+                            trimString(user.getAbout())}
             );
         }
     }
@@ -44,7 +44,7 @@ public class UserRepository{
         List<String[]> entries = Database.getAllEntries(repo);
         List<User> users = new ArrayList<>();
         for (String[] entry : entries){
-            User user = new User(entry[0],entry[1],entry[2],entry[3],reversTrimString(entry[4]));
+            User user = new User(entry[0],entry[1],entry[2],Boolean.valueOf(entry[3]),reversTrimString(entry[4]));
             users.add(user);
         }
         return users;
