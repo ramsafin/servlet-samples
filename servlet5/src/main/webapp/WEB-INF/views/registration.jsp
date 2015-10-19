@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset='UTF-8'><title>registration</title>
-    <link rel="stylesheet" type="text/css" href="/registration.css">
+    <link rel="stylesheet" type="text/css" href="/styles/registration.css">
     <script type="text/javascript" language="javascript">
 
         function validate_form(){

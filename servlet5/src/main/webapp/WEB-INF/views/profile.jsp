@@ -3,35 +3,57 @@
 <html>
 <head>
     <meta charset='UTF-8'><title>registration</title>
-    <link rel="stylesheet" type="text/css" href="/profile.css">
+    <link rel="stylesheet" type="text/css" href="/styles/profile.css">
     <title>my profile</title>
 </head>
 <body>
 
-<div id="wrapper">
+    <div id="wrapper">
 
-    <%--header--%>
-    <div id="header">
-        <h3>my profile</h3>
+        <%--header--%>
+        <div id="header">
+            <h2>my profile</h2>
+        </div>
+
+        <div id="profile">
+            <%--some info about user--%>
+            <div id="information">
+
+                <p><b>Email:</b> <c:out value="${user.getEmail()}"></c:out></p>
+                <br>
+                <p><b>Password:</b> <c:out value="${user.getPassword()}"></c:out></p>
+                <br>
+                <p><b>Sex:</b> <c:out value="${user.getSex()}"></c:out></p>
+                <br>
+                <p><b>Subscribe option:</b> <c:out value="${user.isSubscription()}"></c:out></p>
+                <br>
+
+                <div id="about">
+                    <p><b>About me</b></p>
+                    <br>
+                    <p>
+                        <c:out value="${user.getAbout()}"></c:out>
+                    </p>
+                </div>
+            </div>
+
+
+            <div id="exit">
+                <%--exit from profile--%>
+                <form action='' method="post">
+                    <input id="exit_but" type="submit" value="exit" name="exit">
+                </form>
+            </div>
+
+        </div>
+
+        <%--exception message--%>
+        <div id="info">
+            <c:if test="${not empty message}">
+                <h3>${message}</h3>
+            </c:if>
+        </div>
+
     </div>
-
-    <div id="information">
-
-        <%--here must be information--%>
-
-    </div>
-        
-    <%--exit from profile--%>
-    <form action='' method="post">
-        <input type="submit" value="exit" name="exit">
-    </form>
-
-    <div id="info" style="text-align: center; padding-top: 15px">
-        <c:if test="${not empty message}">
-            <h3>${message}</h3>
-        </c:if>
-    </div>
-</div>
-
 </body>
 </html>

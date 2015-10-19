@@ -4,14 +4,14 @@
 <head>
     <title>authentication</title>
     <meta charset='UTF-8'><title>registration</title>
-    <link rel="stylesheet" type="text/css" href="/authentication.css">
+    <link rel="stylesheet" type="text/css" href="/styles/authentication.css">
 </head>
 <body>
 
 <div id="wrapper">
     <%--header--%>
-    <div id="header" style="text-align: center; width: 100%; height: 30px;padding-top: 10px">
-        <h1>authentication</h1>
+    <div id="header">
+        <h2>authentication</h2>
     </div>
 
     <%--form for authenticate--%>
@@ -19,21 +19,25 @@
 
         <form id="form" action='' method='POST'>
 
-            <%--email--%>
-            <label>
-                <p>Your email:</p>
-                <input id="email" class="field" type="text" name="email">
-            </label>
-            <br>
+            <div id="email_passwordDiv">
+                <%--email--%>
+                <label>
+                    <p>Email:</p>
+                    <input id="email" class="field" type="text" name="email">
+                </label>
+                <br>
+                <br>
+                <%--password--%>
+                <label for="password">
+                    <p>Password:</p>
+                    <input id="password" class="field" type="password" name="password">
+                </label>
+            </div>
 
-            <%--password--%>
-            <label for="password">
-                <p>Your password:</p>
-                <input id="password" class="field" type="password" name="password"></label>
-            <br>
-
-            <%--submit button--%>
-            <input id="button" type="submit" value="Войти" name="submit">
+            <div id="e_button">
+                <%--submit button--%>
+                <input id="button" type="submit" value="Войти" name="submit">
+            </div>
 
         </form>
     </div>
