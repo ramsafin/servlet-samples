@@ -21,7 +21,7 @@
 
             <div id="email_passwordDiv">
                 <%--email--%>
-                <label>
+                <label for="email">
                     <p>Email:</p>
                     <input id="email" class="field" type="text" name="email">
                 </label>
@@ -31,6 +31,14 @@
                 <label for="password">
                     <p>Password:</p>
                     <input id="password" class="field" type="password" name="password">
+                </label>
+                <br>
+                <br>
+            </div>
+
+            <div id="remember_me">
+                <label for="remember">
+                    <input type="checkbox" name="remember" id="remember">&nbsp;запомнить меня
                 </label>
             </div>
 

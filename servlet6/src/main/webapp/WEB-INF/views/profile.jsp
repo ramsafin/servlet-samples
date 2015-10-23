@@ -21,11 +21,9 @@
 
                 <p><b>Email:</b> <c:out value="${user.getEmail()}"></c:out></p>
                 <br>
-                <p><b>Password:</b> <c:out value="${user.getPassword()}"></c:out></p>
-                <br>
                 <p><b>Sex:</b> <c:out value="${user.getSex()}"></c:out></p>
                 <br>
-                <p><b>Subscribe option:</b> <c:out value="${user.isSubscription()}"></c:out></p>
+                <p><b>Subscribe option:</b> <c:out value="${user.getSubscription()}"></c:out></p>
                 <br>
 
                 <div id="about">
