@@ -38,7 +38,7 @@
 
             <div id="exit">
                 <%--exit from profile--%>
-                <form action='' method="post">
+                <form action='<c:url value=''></c:url>' method="post">
                     <input id="exit_but" type="submit" value="exit" name="exit">
                 </form>
             </div>

@@ -41,7 +41,8 @@
         <%--my form--%>
         <div id="formDiv">
 
-            <form id="form" name="reg_form" class="form_class" onsubmit="return validate_form()" action='' method='POST'>
+            <form id="form" name="reg_form" class="form_class" onsubmit="return validate_form()"
+                  action='<c:url value=''></c:url>' method='POST'>
 
                 <%--eamil and password div--%>
                 <div id="email_passwordDiv">

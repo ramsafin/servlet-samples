@@ -25,9 +25,8 @@ public class RegistrationServlet extends HttpServlet {
 
             if (cookie != null){
                 //достаем user'а из БД с таким же cookie
-                User user;
                 try {
-                    user = UserRepository.getUserByCookie(cookie);
+                    User user = UserRepository.getUserByCookie(cookie);
                     if (user !=null){
                         //меняем значение cookie для безопасности
                         Cookie newCookie = new Cookie("remember", SecurityService.genRndHash(12));

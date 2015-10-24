@@ -17,7 +17,7 @@
     <%--form for authenticate--%>
     <div id="formDiv">
 
-        <form id="form" action='' method='POST'>
+        <form id="form" action='<c:url value=''></c:url>'  method='POST'>
 
             <div id="email_passwordDiv">
                 <%--email--%>
