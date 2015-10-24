@@ -1,7 +1,5 @@
 package ru.kpfu.itis.entities;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 public class User {
 
     private int id;
@@ -94,40 +92,18 @@ public class User {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        return email.equals(user.email);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + email.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + salt.hashCode();
-        result = 31 * result + sex.hashCode();
-        result = 31 * result + (subscription != null ? subscription.hashCode() : 0);
-        result = 31 * result + (about != null ? about.hashCode() : 0);
-        result = 31 * result + (remember != null ? remember.hashCode() : 0);
-        return result;
-    }
-
-    @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("email", email)
-                .append("password", password)
-                .append("salt", salt)
-                .append("sex", sex)
-                .append("subscription", subscription)
-                .append("about", about)
-                .append("remember", remember)
+        return new StringBuilder()
+                .append("id = ").append(id)
+                .append("\nemail = ").append(email)
+                .append("\npassword = ").append(password)
+                .append("\nsalt = ").append(salt)
+                .append("\nsex = ").append(sex)
+                .append("\nsubscription = ").append(subscription)
+                .append("\nremember cookie = ").append(remember)
+                .append("\n-----about-----\n")
+                .append(about).append("\n")
+                .append("++++++++++++++++++++++++++++++++++++++++")
                 .toString();
     }
 }

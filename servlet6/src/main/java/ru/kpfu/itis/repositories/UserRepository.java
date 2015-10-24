@@ -6,6 +6,7 @@ import ru.kpfu.itis.exceptions.SecurityException;
 import ru.kpfu.itis.utilities.Database;
 import ru.kpfu.itis.utilities.SecurityService;
 
+import javax.servlet.http.Cookie;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -77,9 +78,9 @@ public class UserRepository {
     }
 
 
-    public static User getUserByCookieValue(String value) throws SQLException {
+    public static User getUserByCookie(Cookie cookie) throws SQLException {
         ResultSet set = Database.getInstance()
-                .query("select * from users where remember ="+ "'"+value+"';");
+                .query("select * from users where "+ cookie.getName() +" = '" +cookie.getValue() +"';");
 
         if (set.next()){
             int id       = set.getInt(1);
@@ -90,7 +91,6 @@ public class UserRepository {
             String subs  = set.getString(6);
             String about = set.getString(7);
             String remem = set.getString(8);
-            System.out.println("UserRepo returns user with cookie value = " + remem);
             return new User(id,e,p,salt,sex,subs,about,remem);
         }
         return null;
@@ -116,13 +116,13 @@ public class UserRepository {
     }
 
 
-    public static void update(String param, String condition) throws SQLException {
+    public static void updateUserCookie(User user, Cookie cookie) throws SQLException {
 
         StringBuilder query = new StringBuilder("");
         query.append("update users");
-        query.append(" set ").append(param).append(" = ").append("'")
-                .append(SecurityService.genRndHash(12)).append("'");
-        query.append(" where ").append(condition).append(";");
+        query.append(" set ").append(cookie.getName()).append(" = ").append("'")
+                .append(cookie.getValue()).append("'");
+        query.append(" where ").append("id = ").append(user.getId()).append(";");
         Database.getInstance().update(query.toString());
     }
 

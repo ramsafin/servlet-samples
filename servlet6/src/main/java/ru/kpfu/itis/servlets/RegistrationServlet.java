@@ -4,6 +4,8 @@ import ru.kpfu.itis.entities.User;
 import ru.kpfu.itis.exceptions.*;
 import ru.kpfu.itis.exceptions.SecurityException;
 import ru.kpfu.itis.repositories.UserRepository;
+import ru.kpfu.itis.utilities.SecurityService;
+import ru.kpfu.itis.utilities.ServletUtilities;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -17,32 +19,31 @@ public class RegistrationServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-        Cookie[] cookies = req.getCookies();
-        if(cookies != null){
-            for (Cookie cookie : cookies){
-                if (cookie.getName().equals("remember")){
-                    //достаем user'а из БД с таким же cookie
-                    User user = null;
-                    try {
-                        user = UserRepository.getUserByCookieValue("remember");
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+        if ((session.getAttribute("user_a") == null)){
+
+            Cookie cookie = ServletUtilities.getCookie(req, "remember");
+
+            if (cookie != null){
+                //достаем user'а из БД с таким же cookie
+                User user;
+                try {
+                    user = UserRepository.getUserByCookie(cookie);
                     if (user !=null){
-                        try {
-                            //меняем значение cookie
-                            UserRepository.update("remember", "id = "+user.getId());
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
+                        //меняем значение cookie для безопасности
+                        Cookie newCookie = new Cookie("remember", SecurityService.genRndHash(12));
+                        newCookie.setMaxAge(60*60*10);
+                        UserRepository.updateUserCookie(user,newCookie);
+                        resp.addCookie(newCookie);
                         session.setAttribute("user_a",user);
+                        resp.sendRedirect("/profile?id="+user.getId());
+                        return;
                     }
-                    break;
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
-        }
 
-        if ((session.getAttribute("user_a") == null)){
             req.getServletContext().getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req,resp);
         }else {
             //зашел в профиль, пересылаем на профиль
