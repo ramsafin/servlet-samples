@@ -31,11 +31,11 @@ public class AuthenticationServlet extends HttpServlet {
                     if (user !=null){
                         //меняем значение cookie для безопасности
                         Cookie newCookie = new Cookie("remember", SecurityService.genRndHash(12));
-                        newCookie.setMaxAge(60*60*10);
+                        newCookie.setMaxAge(60*60*48);
                         UserRepository.updateUserCookie(user,newCookie);
                         resp.addCookie(newCookie);
                         session.setAttribute("user_a",user);
-                        resp.sendRedirect("/profile?id="+user.getId());
+                        resp.sendRedirect("/profile");
                         return;
                     }
 
@@ -44,9 +44,9 @@ public class AuthenticationServlet extends HttpServlet {
                 }
             }
 
-            req.getServletContext().getRequestDispatcher("/WEB-INF/views/authentication.jsp").forward(req, resp);
+            req.getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
         }else {
-            //зашел в профиль, пересылаем на профиль
+            //пересылаем на профиль
             resp.sendRedirect("/profile");
         }
     }
@@ -59,8 +59,8 @@ public class AuthenticationServlet extends HttpServlet {
         String password = req.getParameter("password");
         String remember = req.getParameter("remember"); //box запомнить меня
 
-        if (email == null || password == null){
-            req.setAttribute("message","Fill email and password fields");
+        if ("".equals(email) || "".equals(password) ){
+            req.setAttribute("message","Enter email and password");
         }else {
             try {
                 User user = IdentificationService.identification(email,password);
@@ -69,7 +69,7 @@ public class AuthenticationServlet extends HttpServlet {
                 //если нужно запомнить user`а и он прошел идентификацию
                 if (remember != null){
                     Cookie cookie = new Cookie("remember", SecurityService.genRndHash(12));
-                    cookie.setMaxAge(60*60*10);
+                    cookie.setMaxAge(60*60*48);
                     UserRepository.updateUserCookie(user,cookie);
                     resp.addCookie(cookie);
 
@@ -82,6 +82,6 @@ public class AuthenticationServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        req.getServletContext().getRequestDispatcher("/WEB-INF/views/authentication.jsp").forward(req,resp);
+        req.getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req,resp);
     }
 }

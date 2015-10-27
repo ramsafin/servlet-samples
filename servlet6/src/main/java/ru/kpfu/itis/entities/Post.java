@@ -8,17 +8,28 @@ public class Post {
     private int id;
     private String text;
     private String publishedTime;
-    private User user;
+    private int user_id;
+    private String user_name;
 
-    public Post(int id, String text, User user) {
+    public Post(String text, int user_id) {
+        this(text,currentDate(),user_id);
+    }
+
+    public Post(String text, String publishedTime, int user_id) {
+        this.text = text;
+        this.publishedTime = publishedTime;
+        this.user_id = user_id;
+    }
+
+    public Post(int id, String text, String publishedTime, int user_id) {
         this.id = id;
         this.text = text;
-        this.publishedTime = currentDate();
-        this.user = user;
+        this.publishedTime = publishedTime;
+        this.user_id = user_id;
     }
 
     private static String currentDate(){
-        return new SimpleDateFormat("E, dd.MM.yyyy HH:mm:ss").format(new Date());
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
     }
 
     public int getId() {
@@ -45,11 +56,26 @@ public class Post {
         this.publishedTime = publishedTime;
     }
 
-    public User getUser() {
-        return user;
+    public int getUser() {
+        return user_id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getUserName() {
+        return user_name;
+    }
+
+    public void setUserName(String user_name) {
+        this.user_name = user_name;
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder("").append(id).append("\ntext\n")
+        .append(text).append("\n").append("time = ").
+        append(publishedTime).append("\n").append("user =  ").append(user_name).toString();
     }
 }

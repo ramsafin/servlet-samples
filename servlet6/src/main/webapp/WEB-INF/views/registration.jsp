@@ -1,12 +1,25 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset='UTF-8'><title>registration</title>
-    <link rel="stylesheet" type="text/css" href="/styles/registration.css">
-    <script type="text/javascript" language="javascript">
+    <meta content="text/html" charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <title>registration</title>
+
+    <style type="text/css">
+        a{
+            color : #fff;
+        }
+        .navbar-inverse{
+            border-radius: 0;
+        }
+    </style>
+
+    <script language="JavaScript">
 
         function validate_form(){
 
@@ -15,86 +28,178 @@
                 alert("Некорректный email! Введите еще раз!")
                 return false;
             }
+
             var inp = document.getElementsByName('sex');
             if (!inp[0].checked && !inp[1].checked) {
                 alert("Выберите свой пол!!!");
                 return false;
             }
-            return true;
 
+            return true;
         }
+
         function count (str) {
-            document.getElementById('symbols').innerHTML=str.length;
+            document.getElementById('counter').innerHTML=str.length;
         }
 
     </script>
+
 </head>
 <body>
-    <%--wrapper--%>
-    <div id="wrapper">
+<div id="wrapper">
 
-        <%--header of registration form--%>
-        <div id="header">
-            <h1>Registration form</h1>
-        </div>
+    <div id="navbar-top">
 
-        <%--my form--%>
-        <div id="formDiv">
+        <nav class="navbar navbar-inverse">
 
-            <form id="form" name="reg_form" class="form_class" onsubmit="return validate_form()"
-                  action='<c:url value=''></c:url>' method='POST'>
+            <div class="container-fluid">
 
-                <%--eamil and password div--%>
-                <div id="email_passwordDiv">
-                    <%--email--%>
-                    <label for="email"><p>Email:</p><input id="email" class="email_class" type='text' name='email'></label>
-                    <br>
-                    <br>
-                    <%--password--%>
-                    <label for="password"><p>Password</p><input id="password" class="email_class" type='password' name='password'></label>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">ITIS programming 3</a>
                 </div>
 
-                <%--radios div--%>
-                <div id="radiosDiv">
-                    <%--radios sex (male and female)--%>
-                    <label for="sex1"><input class="sex_class" id="sex1" type='radio' name='sex' value="male">&nbsp;мужской</label>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <label for="sex2"><input class="sex_class" id="sex2" type='radio' name='sex' value="female">&nbsp;женский</label>
+                <div class="collapse navbar-collapse">
+
+                    <!--страницы куда можно перейти -->
+                    <ul class="nav navbar-nav">
+
+                        <li>
+                            <a href="<c:url value="/welcome"></c:url>">Welcome</a>
+                        </li>
+
+                        <li>
+                            <a href="<c:url value="/profile"></c:url>">Profile</a>
+                        </li>
+
+                        <li>
+                            <a href="<c:url value="/posts"></c:url>">Posts</a>
+                        </li>
+                    </ul>
+
+                    <!-- вход и регистрация -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <%--если вошел гость--%>
+                        <li>
+                            <a href="<c:url value="/registration"></c:url>">
+                                <span class="glyphicon glyphicon-user"></span> Sign Up
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="<c:url value="/login"></c:url>">
+                                <span class="glyphicon glyphicon-log-in"></span> Login
+                            </a>
+                        </li>
+
+                    </ul>
+
                 </div>
 
-                <%--about people div--%>
-                <div id="aboutDiv">
-                    <p>
-                        <label><p>Напишите про себя:</p>
-                            <textarea id="about" onkeyup="count(value)" maxlength="50" name="about"></textarea>
-                        </label>
-                    </p>
-                    <%--counter of symbils in about--%>
-                    <p>символов <b id="symbols">0</b>/<b>50</b></p>
+            </div>
+
+        </nav>
+
+        <%--end id navbar-top--%>
+    </div>
+
+    <div id="profile" style="padding-top:50px;">
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-3"></div>
+
+                <div class="col-md-6">
+
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading" >
+                            <h3 class="panel-title">&nbsp;Registration</h3>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="row">
+
+                                <form name="reg_form" action='<c:url value=""></c:url>' onsubmit="return validate_form()" method="POST" style="padding :15px;">
+                                    <!-- email field -->
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="at-addon">@</span>
+                                        <input id="email" type="text" name="email" class="form-control" placeholder="email@example.com" aria-describedby="basic-addon1">
+
+                                    </div>
+                                    <br>
+                                    <!-- Password field -->
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                                    </div>
+
+                                    <br>
+
+                                    <!-- two radios -->
+                                    <div id="radios">
+                                        <label class="radio-inline" for="radio1">
+                                            <input id="radio1" type="radio" name="sex" value="male" checked>male
+                                        </label>
+                                        <label class="radio-inline" for="radio2">
+                                            <input id="radio2" type="radio" name="sex" value="female">female
+                                        </label>
+                                    </div>
+
+                                    <br>
+
+                                    <!-- subscribe checkbox -->
+                                    <div class="checkbox">
+                                        <label for="subscription">
+                                            <input id="subscription" name="subscription" type="checkbox"> subscribe for news?
+                                        </label>
+                                    </div>
+                                    <br>
+
+                                    <div class="form-group">
+                                        <label for="about">About yourself:</label>
+                                        <textarea style="resize: none" name="about" class="form-control" rows="5" id="about" onkeyup="count(value)" maxlength="50"></textarea>
+                                        <p>symbols <b id="counter">0</b>/<b>50</b></p>
+                                    </div>
+
+                                    <br>
+
+                                    <!-- submit button -->
+                                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
 
+                <div class="col-md-3"></div>
 
-                <%--checkbox div--%>
-                <div id="checkboxDiv">
-                    <%--subcribtion--%>
-                    <label for="box"><input id="box" class="box_class" type='checkbox' name='subscription'>&nbsp;подписаться</label>
-                </div>
+                <!-- row ends -->
+            </div>
 
-                <%--submit button--%>
-                <div>
-                    <input class="submit-class" id="submit" type='submit' value='отправить'>
-                </div>
-
-            </form>
-        </div>
-
-        <%--exceptions div--%>
-        <div id="message">
-            <c:if test="${not empty message}">
-                <h3>${message}</h3>
-            </c:if>
         </div>
 
     </div>
+
+
+    <!-- footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="text-right">
+                <hr>
+                <p class="text-muted">&copy; Copyright 2015 Ramil Safin</p>
+                <hr>
+            </div>
+        </div>
+    </footer>
+
+    <!-- wrapper ends-->
+</div>
+
 </body>
 </html>

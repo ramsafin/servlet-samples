@@ -30,11 +30,11 @@ public class RegistrationServlet extends HttpServlet {
                     if (user !=null){
                         //меняем значение cookie для безопасности
                         Cookie newCookie = new Cookie("remember", SecurityService.genRndHash(12));
-                        newCookie.setMaxAge(60*60*10);
+                        newCookie.setMaxAge(60*60*48);
                         UserRepository.updateUserCookie(user,newCookie);
                         resp.addCookie(newCookie);
                         session.setAttribute("user_a",user);
-                        resp.sendRedirect("/profile?id="+user.getId());
+                        resp.sendRedirect("/welcome");
                         return;
                     }
 
@@ -45,8 +45,7 @@ public class RegistrationServlet extends HttpServlet {
 
             req.getServletContext().getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req,resp);
         }else {
-            //зашел в профиль, пересылаем на профиль
-            resp.sendRedirect("/profile");
+            resp.sendRedirect("/welcome");
         }
     }
 
@@ -58,11 +57,10 @@ public class RegistrationServlet extends HttpServlet {
         String password = req.getParameter("password");
         String sex = req.getParameter("sex");
         String subscription = req.getParameter("subscription") == null ? "off":"on";
-        String about = req.getParameter("about") == null? "" : req.getParameter("about");
-        String remember = req.getParameter("remember");
+        String about = req.getParameter("about");
 
 
-        if (sex == null || email == null || password == null){
+        if (sex == null || "".equals(email) || "".equals(password) ){
 
             req.setAttribute("message","Fill all fields");
 
@@ -70,14 +68,16 @@ public class RegistrationServlet extends HttpServlet {
 
             //пытаемся добавить пользователя
             try{
-                UserRepository.addUser( new User(email,password,sex,subscription,about,remember) );
-                resp.sendRedirect("/authentication");
+                UserRepository.addUser( new User(email,password,sex,subscription,about) );
+                resp.sendRedirect("/login");
                 return;
             } catch (NotValidPasswordException | NotValidEmailException |
                     DuplicateEntryException | DatabaseException e) {
 
                 req.setAttribute("message",e.getMessage());
+
             } catch (SecurityException | SQLException e) {
+                req.setAttribute("message","problems in server");
                 e.printStackTrace();
             }
         }

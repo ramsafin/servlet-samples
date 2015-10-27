@@ -9,8 +9,6 @@ import ru.kpfu.itis.utilities.SecurityService;
 import javax.servlet.http.Cookie;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 public class UserRepository {
@@ -20,8 +18,8 @@ public class UserRepository {
             NotValidEmailException, NotValidPasswordException, SecurityException, SQLException {
         //проверяем сначала email и password
         //потому что не нужно образаться к БД
-        checkEmail(user.getEmail());
-        checkPassword(user.getPassword());
+        checkUserEmail(user.getEmail());
+        checkUserPassword(user.getPassword());
         checkForDuplicates(user);
 
         //меняем пароль на hashcode (password+salt)
@@ -40,25 +38,6 @@ public class UserRepository {
     }
 
 
-    public static List<User> getUsers() throws SQLException {
-        List<User> users = new LinkedList<>();
-        ResultSet set = Database.getInstance().query("select * from users;");
-
-        while (set.next()){
-            int id       = set.getInt(1);
-            String e     = set.getString(2);
-            String p     = set.getString(3);
-            String salt  = set.getString(4);
-            String sex   = set.getString(5);
-            String subs  = set.getString(6);
-            String about = set.getString(7);
-            String remem = set.getString(8);
-            users.add( new User(id,e,p,salt,sex,subs,about,remem) );
-        }
-        return users;
-    }
-
-
     public static User getUserByEmail(String email) throws SQLException {
         ResultSet set = Database.getInstance()
                 .query("select * from users where email ="+ "'"+email+"';");
@@ -69,8 +48,8 @@ public class UserRepository {
             String p     = set.getString(3);
             String salt  = set.getString(4);
             String sex   = set.getString(5);
-            String subs  = set.getString(6);
-            String about = set.getString(7);
+            String subs  = set.getNString(6);
+            String about = set.getNString(7);
             String remem = set.getString(8);
             return new User(id,e,p,salt,sex,subs,about,remem);
         }
@@ -88,8 +67,8 @@ public class UserRepository {
             String p     = set.getString(3);
             String salt  = set.getString(4);
             String sex   = set.getString(5);
-            String subs  = set.getString(6);
-            String about = set.getString(7);
+            String subs  = set.getNString(6);
+            String about = set.getNString(7);
             String remem = set.getString(8);
             return new User(id,e,p,salt,sex,subs,about,remem);
         }
@@ -107,8 +86,8 @@ public class UserRepository {
             String p     = set.getString(3);
             String salt  = set.getString(4);
             String sex   = set.getString(5);
-            String subs  = set.getString(6);
-            String about = set.getString(7);
+            String subs  = set.getNString(6);
+            String about = set.getNString(7);
             String remem = set.getString(8);
             return new User(cID,e,p,salt,sex,subs,about,remem);
         }
@@ -127,7 +106,7 @@ public class UserRepository {
     }
 
 
-    private static void checkEmail(String email) throws NotValidEmailException {
+    private static void checkUserEmail(String email) throws NotValidEmailException {
         Pattern pattern = Pattern.compile("^([a-zA-Z0-9_\\.\\+-]{1,63})" +
                 "@([a-zA-Z0-9-]+\\.[a-zA-Z]{2,})$");
         if (!pattern.matcher(email).matches()){
@@ -136,7 +115,7 @@ public class UserRepository {
     }
 
 
-    private static void checkPassword(String password) throws NotValidPasswordException {
+    private static void checkUserPassword(String password) throws NotValidPasswordException {
         if (password.length() < 4 || password.length() > 24){
             throw new NotValidPasswordException("Password is not valid: it must contain from 4 to 24 symbols");
         }

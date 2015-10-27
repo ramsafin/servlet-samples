@@ -18,5 +18,4 @@ public class ServletUtilities {
         return null;
     }
 
-
 }

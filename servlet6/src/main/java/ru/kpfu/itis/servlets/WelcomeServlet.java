@@ -10,8 +10,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class ProfileServlet extends HttpServlet {
-
+public class WelcomeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -33,7 +32,8 @@ public class ProfileServlet extends HttpServlet {
                         UserRepository.updateUserCookie(user,newCookie);
                         resp.addCookie(newCookie);
                         session.setAttribute("user_a",user);
-                        resp.sendRedirect("/profile");
+                        req.setAttribute("entered_user",user);
+                        resp.sendRedirect("/welcome");
                         return;
                     }
 
@@ -41,12 +41,12 @@ public class ProfileServlet extends HttpServlet {
                     e.printStackTrace();
                 }
             }
-
-            resp.sendRedirect("/login");
         }else {
-            req.setAttribute("user", session.getAttribute("user_a"));
-            req.getServletContext().getRequestDispatcher("/WEB-INF/views/profile.jsp").forward(req,resp);
+            //если юзер уже вошел
+            req.setAttribute("user",session.getAttribute("user_a"));
         }
+
+        req.getServletContext().getRequestDispatcher("/WEB-INF/views/welcome.jsp").forward(req, resp);
     }
 
     @Override

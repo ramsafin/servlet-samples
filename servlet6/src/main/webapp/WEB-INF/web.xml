@@ -3,50 +3,49 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-
-    <session-config>
-        <session-timeout>20</session-timeout>
-    </session-config>
-
+    <servlet>
+        <servlet-name>welcomeServlet</servlet-name>
+        <servlet-class>ru.kpfu.itis.servlets.WelcomeServlet</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>registrationServlet</servlet-name>
         <servlet-class>ru.kpfu.itis.servlets.RegistrationServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>authenticationServlet</servlet-name>
+        <servlet-class>ru.kpfu.itis.servlets.AuthenticationServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>profileServlet</servlet-name>
         <servlet-class>ru.kpfu.itis.servlets.ProfileServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>authanticateServlet</servlet-name>
-        <servlet-class>ru.kpfu.itis.servlets.AuthenticationServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>configureServlet</servlet-name>
         <servlet-class>ru.kpfu.itis.servlets.ConfigureServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
         <servlet-name>postServlet</servlet-name>
         <servlet-class>ru.kpfu.itis.servlets.PostServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
-        <servlet-name>configureServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <servlet-name>welcomeServlet</servlet-name>
+        <url-pattern>/welcome</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>registrationServlet</servlet-name>
         <url-pattern>/registration</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>authenticationServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>profileServlet</servlet-name>
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>authanticateServlet</servlet-name>
-        <url-pattern>/authentication</url-pattern>
+        <servlet-name>configureServlet</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>postServlet</servlet-name>
@@ -54,4 +53,15 @@
     </servlet-mapping>
 
 
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+
+    
+   
+
+
 </web-app>
+
+
+

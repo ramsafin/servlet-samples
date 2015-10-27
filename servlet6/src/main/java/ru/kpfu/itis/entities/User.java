@@ -31,6 +31,16 @@ public class User {
         this.remember = remember;
     }
 
+    public User(String email, String password,String sex, String subscription, String about) {
+        this.email = email;
+        this.password = password;
+        this.sex = sex;
+        this.subscription = subscription;
+        this.about = about;
+    }
+
+
+
     public String getEmail() {
         return email;
     }
