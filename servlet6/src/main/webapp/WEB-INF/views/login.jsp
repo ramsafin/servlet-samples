@@ -141,6 +141,13 @@
 
                                 </form>
 
+                                <br>
+                                <br>
+                                <c:if test="${not empty message}">
+                                    <p style="text-align: center">
+                                        <c:out value="${message}"></c:out>
+                                    </p>
+                                </c:if>
                             </div>
 
                         </div>

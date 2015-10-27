@@ -104,6 +104,12 @@
 
     <div id="profile" style="padding-top:50px;">
 
+        <c:if test="${not empty message}">
+            <p style="text-align: center">
+                <c:out value="${message}"></c:out>
+            </p>
+        </c:if>
+
         <div class="container">
 
             <div class="row">
