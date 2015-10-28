@@ -8,7 +8,7 @@ public final class Database {
     private Connection conn;
     private Statement statement;
 
-    private static Database connection;
+    private static Database database;
 
     private Database() {
         String url= "jdbc:mysql://localhost:3306/";
@@ -26,29 +26,19 @@ public final class Database {
 
     public static Database getInstance() {
 
-        if(connection == null) {
+        if(database == null) {
             synchronized (Database.class) {
-                if(connection == null) {
-                    connection = new Database();
+                if(database == null) {
+                    database = new Database();
                 }
             }
         }
-        return connection;
+        return database;
     }
 
-    public ResultSet query(String query) throws SQLException{
-        statement = connection.conn.createStatement();
-        return statement.executeQuery(query);
-    }
+    public static Connection getConnection(){
 
-    public int insert(String insertQuery) throws SQLException {
-        statement = connection.conn.createStatement();
-        return statement.executeUpdate(insertQuery);
-    }
-
-    public int update(String updateQuery) throws SQLException{
-        statement = connection.conn.createStatement();
-        return statement.executeUpdate(updateQuery);
+        return Database.getInstance().conn;
     }
 
 }

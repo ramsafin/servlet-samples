@@ -3,31 +3,32 @@ package ru.kpfu.itis.repositories;
 import ru.kpfu.itis.entities.Post;
 import ru.kpfu.itis.utilities.Database;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Time;
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
 public class PostRepository {
 
-
     public static void addPost(Post post) throws SQLException {
+        StringBuilder s = new StringBuilder("insert into posts(text,date,user_id)")
+        .append("values(?, ?, ?);");
 
-        StringBuilder query = new StringBuilder("");
-        query.append("insert into posts(text,date,user_id) values ").
-                append("('").append(post.getText()).append("', '").append(post.getPublishedTime())
-                .append("',").append(post.getUser()).append(");");
+        PreparedStatement p = Database.getConnection().prepareStatement(s.toString());
 
-        Database.getInstance().insert(query.toString());
+        p.setNString(1, post.getText());
+        p.setString(2, post.getPublishedTime());
+        p.setInt(3,post.getUser());
+
+        p.executeUpdate();
     }
 
 
 
     public static List<Post> getAllPosts() throws SQLException {
-        ResultSet set = Database.getInstance()
-                .query("select * from posts");
+
+        ResultSet set = Database.getConnection().createStatement()
+                .executeQuery("select * from posts");
+
         List<Post> posts = new LinkedList<>();
         while (set.next()){
             int id      = set.getInt(1);

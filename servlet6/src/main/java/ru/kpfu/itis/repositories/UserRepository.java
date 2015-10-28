@@ -7,6 +7,7 @@ import ru.kpfu.itis.utilities.Database;
 import ru.kpfu.itis.utilities.SecurityService;
 
 import javax.servlet.http.Cookie;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Pattern;
@@ -14,71 +15,84 @@ import java.util.regex.Pattern;
 public class UserRepository {
 
 
-    public static void addUser(User user) throws DatabaseException, DuplicateEntryException,
-            NotValidEmailException, NotValidPasswordException, SecurityException, SQLException {
-        //проверяем сначала email и password
-        //потому что не нужно образаться к БД
+    public static void addUser(User user) throws DatabaseException, NotValidEmailException,
+            NotValidPasswordException, SecurityException, SQLException {
+
         checkUserEmail(user.getEmail());
         checkUserPassword(user.getPassword());
-        checkForDuplicates(user);
 
         //меняем пароль на hashcode (password+salt)
         String safety[] = SecurityService.hash(user.getPassword());
         user.setPassword(safety[0]);
         user.setSalt(safety[1]);
 
-        StringBuilder query = new StringBuilder("");
-        query.append("insert into users(email,password,salt,sex,subscription,about,remember)");
-        query.append(" values ('").append(user.getEmail()).append("','").append(user.getPassword()).append("',");
-        query.append("'").append(user.getSalt()).append("','").append(user.getSex()).append("',");
-        query.append("'").append(user.getSubscription()).append("','").append(user.getAbout());
-        query.append("','").append(user.getRemember()).append("');");
+        StringBuilder s = new StringBuilder("insert into users(email,password,salt,sex,subscription,about,remember)")
+        .append(" values (?,?,?,?,?,?,?);");
 
-        Database.getInstance().insert(query.toString());
+        PreparedStatement p = Database.getConnection().prepareStatement(s.toString());
+        p.setString(1,user.getEmail());
+        p.setString(2,user.getPassword());
+        p.setString(3,user.getSalt());
+        p.setString(4, user.getSex());
+        p.setString(5, user.getSubscription());
+        p.setNString(6,user.getAbout());
+        p.setString(7,user.getRemember());
+
+        p.executeUpdate();
     }
 
 
     public static User getUserByEmail(String email) throws SQLException {
-        ResultSet set = Database.getInstance()
-                .query("select * from users where email ="+ "'"+email+"';");
+
+        StringBuilder s = new StringBuilder("select * from users where email = ?;");
+        PreparedStatement p = Database.getConnection().prepareStatement(s.toString());
+
+        p.setString(1,email);
+
+        ResultSet set = p.executeQuery();
 
         if (set.next()){
-            int id       = set.getInt(1);
+            int id      = set.getInt(1);
             String e     = set.getString(2);
-            String p     = set.getString(3);
+            String pass  = set.getString(3);
             String salt  = set.getString(4);
             String sex   = set.getString(5);
-            String subs  = set.getNString(6);
+            String subs  = set.getString(6);
             String about = set.getNString(7);
             String remem = set.getString(8);
-            return new User(id,e,p,salt,sex,subs,about,remem);
+            return new User(id,e,pass,salt,sex,subs,about,remem);
         }
         return null;
     }
 
-
     public static User getUserByCookie(Cookie cookie) throws SQLException {
-        ResultSet set = Database.getInstance()
-                .query("select * from users where "+ cookie.getName() +" = '" +cookie.getValue() +"';");
+
+        StringBuilder s = new StringBuilder("select * from users where remember = ").append("?;");
+        PreparedStatement p = Database.getConnection().prepareStatement(s.toString());
+
+        p.setString(1, cookie.getValue());
+
+        ResultSet set = p.executeQuery();
 
         if (set.next()){
             int id       = set.getInt(1);
             String e     = set.getString(2);
-            String p     = set.getString(3);
+            String pass  = set.getString(3);
             String salt  = set.getString(4);
             String sex   = set.getString(5);
-            String subs  = set.getNString(6);
+            String subs  = set.getString(6);
             String about = set.getNString(7);
             String remem = set.getString(8);
-            return new User(id,e,p,salt,sex,subs,about,remem);
+            return new User(id,e,pass,salt,sex,subs,about,remem);
         }
         return null;
     }
 
 
     public static User getUserById(int id) throws SQLException {
-        ResultSet set = Database.getInstance()
-                .query("select * from users where id = " + "'" + id + "';");
+
+      ResultSet set =   Database.getConnection().createStatement()
+              .executeQuery("select * from users where id = " + "'" + id + "';");
 
         if (set.next()){
             int cID      = set.getInt(1);
@@ -86,7 +100,7 @@ public class UserRepository {
             String p     = set.getString(3);
             String salt  = set.getString(4);
             String sex   = set.getString(5);
-            String subs  = set.getNString(6);
+            String subs  = set.getString(6);
             String about = set.getNString(7);
             String remem = set.getString(8);
             return new User(cID,e,p,salt,sex,subs,about,remem);
@@ -102,8 +116,10 @@ public class UserRepository {
         query.append(" set ").append(cookie.getName()).append(" = ").append("'")
                 .append(cookie.getValue()).append("'");
         query.append(" where ").append("id = ").append(user.getId()).append(";");
-        Database.getInstance().update(query.toString());
+
+        Database.getConnection().createStatement().executeUpdate(query.toString());
     }
+
 
 
     private static void checkUserEmail(String email) throws NotValidEmailException {
@@ -130,14 +146,6 @@ public class UserRepository {
         }
         if (digits == 0 || letters == 0){
             throw new NotValidPasswordException("password is not valid: it must contain letters and digits");
-        }
-    }
-
-    private static void checkForDuplicates(User user) throws DuplicateEntryException,
-            DatabaseException, SQLException {
-
-        if (getUserByEmail(user.getEmail()) != null){
-            throw new DuplicateEntryException("user already exists");
         }
     }
 }

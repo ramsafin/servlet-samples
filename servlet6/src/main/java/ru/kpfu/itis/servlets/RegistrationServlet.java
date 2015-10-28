@@ -71,13 +71,16 @@ public class RegistrationServlet extends HttpServlet {
                 UserRepository.addUser( new User(email,password,sex,subscription,about) );
                 resp.sendRedirect("/login");
                 return;
-            } catch (NotValidPasswordException | NotValidEmailException |
-                    DuplicateEntryException | DatabaseException e) {
-
+            } catch (NotValidPasswordException | NotValidEmailException | DatabaseException e) {
                 req.setAttribute("message",e.getMessage());
 
-            } catch (SecurityException | SQLException e) {
-                req.setAttribute("message","problems in server");
+            } catch (SQLException e) {
+                //duplicate error code
+                if (e.getErrorCode() == 1062){
+                    req.setAttribute("message","user already exists");
+                }
+            } catch (SecurityException e) {
+                req.setAttribute("message","some problems in server(");
                 e.printStackTrace();
             }
         }
