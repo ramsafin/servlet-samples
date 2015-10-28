@@ -79,6 +79,7 @@ public class AuthenticationServlet extends HttpServlet {
             } catch (IdentifyingException e) {
                 req.setAttribute("message",e.getMessage());
             } catch (SecurityException | SQLException e) {
+                req.setAttribute("message","some problems in server(");
                 e.printStackTrace();
             }
         }

@@ -95,6 +95,7 @@ public class PostServlet extends HttpServlet {
 
         if ( "".equals(textForPost)  || textForPost == null){
             req.setAttribute("message","write at least one symbol!");
+            req.getServletContext().getRequestDispatcher("/WEB-INF/views/posts.jsp").forward(req,resp);
         }else {
 
             try {
@@ -110,6 +111,5 @@ public class PostServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        req.getServletContext().getRequestDispatcher("/WEB-INF/views/posts.jsp").forward(req,resp);
     }
 }

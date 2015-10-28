@@ -143,7 +143,7 @@
 
                                 <div class="form-group">
                                     <label for="about">Write a post:</label>
-                                    <textarea name="post" class="form-control" rows="5" id="about"></textarea>
+                                    <textarea style="resize: none" name="post" class="form-control" rows="5" id="about"></textarea>
                                 </div>
 
                                 <button  type="submit" class="btn btn-block btn-success">publish</button>

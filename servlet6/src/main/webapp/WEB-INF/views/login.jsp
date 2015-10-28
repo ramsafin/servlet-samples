@@ -165,7 +165,7 @@
     </div>
 
 
-    <footer class="footer" style="margin-top: 180px;">
+    <footer class="footer" style="margin-top: 140px;">
         <div class="container">
             <div class="text-right">
                 <hr>
