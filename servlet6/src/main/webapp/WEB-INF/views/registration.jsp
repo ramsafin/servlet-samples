@@ -55,7 +55,7 @@
             <div class="container-fluid">
 
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">ITIS programming 3</a>
+                    <a class="navbar-brand" href="http://study.istamendil.info/">ITIS programming 3</a>
                 </div>
 
                 <div class="collapse navbar-collapse">
@@ -78,7 +78,7 @@
 
                     <!-- вход и регистрация -->
                     <ul class="nav navbar-nav navbar-right">
-                        <%--если вошел гость--%>
+
                         <li>
                             <a href="<c:url value="/registration"></c:url>">
                                 <span class="glyphicon glyphicon-user"></span> Sign Up

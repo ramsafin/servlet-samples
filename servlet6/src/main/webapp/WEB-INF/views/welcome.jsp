@@ -33,7 +33,7 @@
                 <div class="container-fluid">
 
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">ITIS programming 3</a>
+                        <a class="navbar-brand" href="http://study.istamendil.info/">ITIS programming 3</a>
                     </div>
 
                     <div class="collapse navbar-collapse">
@@ -60,7 +60,7 @@
                             <!-- если пользователь вошел  -->
                             <c:if test="${not empty user}">
                                 <li>
-                                    <a href="#">
+                                    <a href="<c:url value="/profile"></c:url>">
                                         <c:out value="${user.getEmail()}"></c:out>
                                         &nbsp;
                                         <span class="glyphicon glyphicon-user"></span>

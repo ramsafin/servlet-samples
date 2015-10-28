@@ -30,7 +30,7 @@
             <div class="container-fluid">
 
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">ITIS programming 3</a>
+                    <a class="navbar-brand" href="http://study.istamendil.info/">ITIS programming 3</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="myNavbar">
@@ -52,7 +52,7 @@
                     <!-- вход и регистрация -->
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="#">
+                            <a href="<c:url value="/profile"></c:url>">
                                 <c:out value="${user.getEmail()}"></c:out>
                                 &nbsp;<span class="glyphicon glyphicon-user"></span>
                             </a>
@@ -105,12 +105,14 @@
                                 <div class="col-md-3 col-lg-3 " align="center">
 
                                     <c:if test="${user.getSex().equals('male')}">
-                                        <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png"
+                                        <%--src="https://cdn4.iconfinder.com/data/icons/rcons-user/32/child_boy-512.png"--%>
+                                        <img alt="User Pic" src="https://cdn4.iconfinder.com/data/icons/rcons-user/32/child_boy-512.png"
                                              class="img-circle img-responsive">
                                     </c:if>
 
                                     <c:if test="${user.getSex().equals('female')}">
-                                       <%--other picture--%>
+                                        <img alt="User Pic" src="http://simpleicon.com/dev/wp-content/uploads/business-woman-2-256x256.png"
+                                             class="img-circle img-responsive">
                                     </c:if>
 
                                 </div>
@@ -158,6 +160,7 @@
                                         </tr>
 
                                     </table>
+                                    </table>
 
                                 </div>
                             </div>
@@ -193,9 +196,9 @@
 
         </div>
 
-
-
     </div>
+
+
     <!-- wrapper ends -->
 </div>
 
