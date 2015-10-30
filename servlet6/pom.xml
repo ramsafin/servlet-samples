@@ -48,11 +48,7 @@
         </dependency>
 
         <!-- utilities -->
-        <dependency>
-            <groupId>com.opencsv</groupId>
-            <artifactId>opencsv</artifactId>
-            <version>${com.opencsv.version}</version>
-        </dependency>
+
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
@@ -68,7 +64,6 @@
     </dependencies>
 
     <build>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -84,6 +84,7 @@ public class RegistrationServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+
         req.getServletContext().getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req,resp);
     }
 }

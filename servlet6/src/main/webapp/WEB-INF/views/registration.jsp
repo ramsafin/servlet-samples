@@ -4,8 +4,9 @@
 <html>
 <head>
     <meta content="text/html" charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+
+    <link href="<c:url value="/resources/styles/css/bootstrap.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/styles/css/bootstrap-theme.css"/>" rel="stylesheet">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <title>registration</title>

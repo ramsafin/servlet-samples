@@ -4,8 +4,9 @@
 <html>
 <head>
     <meta content="text/html" charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+
+    <link href="<c:url value="/resources/styles/css/bootstrap.css"/>" rel="stylesheet">
+    <link href="<c:url value="/resources/styles/css/bootstrap-theme.css"/>" rel="stylesheet">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <title>Profile</title>
@@ -105,13 +106,12 @@
                                 <div class="col-md-3 col-lg-3 " align="center">
 
                                     <c:if test="${user.getSex().equals('male')}">
-                                        <%--src="https://cdn4.iconfinder.com/data/icons/rcons-user/32/child_boy-512.png"--%>
-                                        <img alt="User Pic" src="https://cdn4.iconfinder.com/data/icons/rcons-user/32/child_boy-512.png"
+                                        <img alt="User Pic" src="<c:url value="/resources/icons/male.png"/> "
                                              class="img-circle img-responsive">
                                     </c:if>
 
                                     <c:if test="${user.getSex().equals('female')}">
-                                        <img alt="User Pic" src="http://simpleicon.com/dev/wp-content/uploads/business-woman-2-256x256.png"
+                                        <img alt="User Pic" src="<c:url value="/resources/icons/female.png"/> "
                                              class="img-circle img-responsive">
                                     </c:if>
 
@@ -172,18 +172,18 @@
 
                                     <form method="POST" action="<c:url value=""></c:url>">
 
-                                        <%--<span>--%>
-                                            <%--<button--%>
-                                                <%--type="submit" name="delete_user" value="delete" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i>--%>
-                                                <%--Delete an account--%>
-                                            <%--</button>--%>
-                                        <%--</span>--%>
+                                        <span>
+                                            <button
+                                                type="submit" name="delete_user" value="delete" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i>
+                                                Delete an account
+                                            </button>
+                                        </span>
 
-                                        <%--<!--сслыка на сервлет по изменению профиля -->--%>
-                                        <%--<span class="pull-right">--%>
-                                            <%--<a type="submit" class="btn btn-sm btn-info"><i class="glyphicon glyphicon-cog"></i> Profile settings--%>
-                                            <%--</a>--%>
-                                        <%--</span>--%>
+                                        <!--сслыка на сервлет по изменению профиля -->
+                                        <span class="pull-right">
+                                            <a type="submit" class="btn btn-sm btn-info"><i class="glyphicon glyphicon-cog"></i> Profile settings
+                                            </a>
+                                        </span>
 
                                     </form>
                         </div>
