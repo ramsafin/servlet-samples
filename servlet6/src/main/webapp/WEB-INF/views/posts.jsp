@@ -3,8 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta content="text/html", charset="utf-8">
-
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="<c:url value="/resources/styles/css/bootstrap.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/styles/css/bootstrap-theme.css"/>" rel="stylesheet">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -140,11 +139,11 @@
 
                         <div id="post">
 
-                            <form action="<c:url value=""></c:url>" method="POST">
+                            <form accept-charset="utf-8" action="<c:url value=""></c:url>" method="POST">
 
                                 <div class="form-group">
                                     <label for="about">Write a post:</label>
-                                    <textarea style="resize: none" name="post" class="form-control" rows="5" id="about"></textarea>
+                                    <textarea  style="resize: none" name="post" class="form-control" rows="5" id="about"></textarea>
                                 </div>
 
                                 <button  type="submit" class="btn btn-block btn-success">publish</button>

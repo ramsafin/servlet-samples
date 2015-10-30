@@ -10,12 +10,14 @@ import java.util.List;
 public class PostRepository {
 
     public static void addPost(Post post) throws SQLException {
+
         StringBuilder s = new StringBuilder("insert into posts(text,date,user_id)")
         .append("values(?, ?, ?);");
 
         PreparedStatement p = Database.getConnection().prepareStatement(s.toString());
 
         p.setNString(1, post.getText());
+
         p.setString(2, post.getPublishedTime());
         p.setInt(3,post.getUser());
 
@@ -36,8 +38,10 @@ public class PostRepository {
             Date date   = set.getDate(3);
             Time time   = set.getTime(3);
             int user_id = set.getInt(4);
+
             Post post = new Post(id,text,date.toString()+"  " + time.toString(),user_id);
             post.setUserName(UserRepository.getUserById(user_id).getEmail());
+
             posts.add(post);
         }
         return posts;

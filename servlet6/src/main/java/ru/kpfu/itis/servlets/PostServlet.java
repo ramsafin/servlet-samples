@@ -100,12 +100,13 @@ public class PostServlet extends HttpServlet {
 
             try {
                 User user = (User)session.getAttribute("user_a");
+
                 Post post = new Post(textForPost,user.getId());
                 post.setUserName(user.getEmail());
                 PostRepository.addPost(post);
                 req.setAttribute("message","Post was successfully added)");
                 resp.sendRedirect("/posts");
-                return;
+
             } catch (SQLException e) {
                 req.setAttribute("message","Sorry, we can't publish your post(");
                 e.printStackTrace();
