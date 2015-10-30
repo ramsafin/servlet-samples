@@ -15,11 +15,13 @@
 
             $('#myButton').click(function(){
 
-//                $('h1').text("Good Bye!");
-
+                if($('h1').text().length != 0){
+                    $('h1').text("");
+                    return;
+                }
                 $.getJSON('/example.json', {}, function(json){
 
-                    $('h1').text(json.message.m1 +"  "+ json.message.m2);
+                    $('h1').text(json.message.m1 +"   "+json.message.m2);
 
                     $('#info').css("text-align","center");
                 });

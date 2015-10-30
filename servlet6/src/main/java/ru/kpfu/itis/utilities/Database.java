@@ -6,7 +6,6 @@ import java.sql.*;
 public final class Database {
 
     private Connection conn;
-    private Statement statement;
 
     private static Database database;
 
