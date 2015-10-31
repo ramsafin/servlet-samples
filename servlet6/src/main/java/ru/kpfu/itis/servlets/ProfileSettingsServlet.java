@@ -1,8 +1,6 @@
 package ru.kpfu.itis.servlets;
 
 import ru.kpfu.itis.entities.User;
-import ru.kpfu.itis.exceptions.*;
-import ru.kpfu.itis.exceptions.SecurityException;
 import ru.kpfu.itis.repositories.UserRepository;
 import ru.kpfu.itis.utilities.SecurityService;
 import ru.kpfu.itis.utilities.ServletUtilities;
@@ -12,7 +10,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class RegistrationServlet extends HttpServlet {
+public class ProfileSettingsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,7 +32,7 @@ public class RegistrationServlet extends HttpServlet {
                         UserRepository.updateUserCookie(user,newCookie);
                         resp.addCookie(newCookie);
                         session.setAttribute("user_a",user);
-                        resp.sendRedirect("/welcome");
+                        resp.sendRedirect("/profileSettings");
                         return;
                     }
 
@@ -43,51 +41,35 @@ public class RegistrationServlet extends HttpServlet {
                 }
             }
 
-            req.getServletContext().getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req,resp);
+            resp.sendRedirect("/login");
         }else {
-            resp.sendRedirect("/welcome");
+            req.setAttribute("user", session.getAttribute("user_a"));
+            req.getServletContext().getRequestDispatcher("/WEB-INF/views/profileSettings.jsp").forward(req,resp);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        //вытаскиваем информацию формы
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
+        HttpSession session = req.getSession();
+
         String sex = req.getParameter("sex");
         String subscription = req.getParameter("subscription") == null ? "off":"on";
         String about = req.getParameter("about");
 
-        System.out.println("i am in doPost registration");
+        if (req.getParameter("settings") != null){
+            try {
+                User user = (User) session.getAttribute("user_a");
+                user.setSex(sex);
+                user.setAbout(about);
+                user.setSubscription(subscription);
 
-
-        if (sex == null || "".equals(email) || "".equals(password) ){
-
-            req.setAttribute("message","Fill all fields");
-
-        }else {
-
-            //пытаемся добавить пользователя
-            try{
-                UserRepository.addUser( new User(email,password,sex,subscription,about) );
-                System.out.println("i am in doPost registration added user ");
-                  resp.sendRedirect("/login");
-                return;
-            } catch (NotValidPasswordException | NotValidEmailException | DatabaseException e) {
-                req.setAttribute("message",e.getMessage());
-
+                UserRepository.updateUser(user);
+                resp.sendRedirect("/profile");
             } catch (SQLException e) {
-                //duplicate error code
-                if (e.getErrorCode() == 1062){
-                    req.setAttribute("message","user already exists");
-                }
-            } catch (SecurityException e) {
-                req.setAttribute("message","some problems in server(");
+                req.setAttribute("message","server problems");
                 e.printStackTrace();
             }
         }
-        System.out.println("to registration.jsp again ");
-        req.getServletContext().getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req,resp);
     }
 }

@@ -39,7 +39,11 @@ public class User {
         this.about = about;
     }
 
-
+    public User(String sex, String subscription, String about) {
+        this.sex = sex;
+        this.subscription = subscription;
+        this.about = about;
+    }
 
     public String getEmail() {
         return email;

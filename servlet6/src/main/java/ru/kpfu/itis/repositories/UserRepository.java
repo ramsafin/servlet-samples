@@ -1,7 +1,9 @@
 package ru.kpfu.itis.repositories;
 
 import ru.kpfu.itis.entities.User;
-import ru.kpfu.itis.exceptions.*;
+import ru.kpfu.itis.exceptions.DatabaseException;
+import ru.kpfu.itis.exceptions.NotValidEmailException;
+import ru.kpfu.itis.exceptions.NotValidPasswordException;
 import ru.kpfu.itis.exceptions.SecurityException;
 import ru.kpfu.itis.utilities.Database;
 import ru.kpfu.itis.utilities.SecurityService;
@@ -39,6 +41,11 @@ public class UserRepository {
         p.setString(7,user.getRemember());
 
         p.executeUpdate();
+    }
+
+    public static void deleteUser(User user) throws SQLException {
+        Database.getConnection().createStatement()
+                .executeUpdate("delete from users where id = " + user.getId());
     }
 
 
@@ -106,6 +113,18 @@ public class UserRepository {
             return new User(cID,e,p,salt,sex,subs,about,remem);
         }
         return null;
+    }
+
+
+    public static void updateUser(User user) throws SQLException {
+
+         StringBuilder query = new StringBuilder("UPDATE users ")
+         .append("SET sex = '").append(user.getSex()).append("', about = '")
+         .append(user.getAbout()).append("',subscription = '")
+         .append(user.getSubscription()).append("'").append("WHERE id = ")
+         .append(user.getId()).append(";");
+
+        Database.getConnection().createStatement().executeUpdate(query.toString());
     }
 
 

@@ -95,7 +95,7 @@
 
                     <div class="panel panel-default">
 
-                        <div id="p" class="panel-heading" >
+                        <div id="p" class="panel-heading well" >
                             <h3 class="panel-title">&nbsp;&nbsp;&nbsp;Information</h3>
                         </div>
 
@@ -168,21 +168,21 @@
 
                         <div class="panel-footer">
 
-                                    <%--В разработке ......--%>
-
                                     <form method="POST" action="<c:url value=""></c:url>">
 
                                         <span>
                                             <button
-                                                type="submit" name="delete_user" value="delete" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i>
+                                                type="submit" name="delete" value="delete" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i>
                                                 Delete an account
                                             </button>
                                         </span>
 
                                         <!--сслыка на сервлет по изменению профиля -->
                                         <span class="pull-right">
-                                            <a type="submit" class="btn btn-sm btn-info"><i class="glyphicon glyphicon-cog"></i> Profile settings
-                                            </a>
+                                             <button
+                                                 type="submit" name="settings" value="settings" class="btn btn-sm btn-info"><i class="glyphicon glyphicon-cog"></i>
+                                                 Profile settings
+                                             </button>
                                         </span>
 
                                     </form>

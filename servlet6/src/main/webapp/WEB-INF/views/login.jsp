@@ -111,7 +111,7 @@
 
                     <div class="panel panel-default">
 
-                        <div class="panel-heading" >
+                        <div class="panel-heading well" >
                             <h3 class="panel-title">&nbsp;Login</h3>
                         </div>
 
@@ -137,8 +137,8 @@
                                             <input id="remember" name="remember" type="checkbox"> remember me
                                         </label>
                                     </div>
-
-                                    <button id="button" type="submit" class="btn btn-default">Submit</button>
+                                    <br>
+                                    <button id="button" type="submit" class="btn btn-block btn-primary">Submit</button>
 
                                 </form>
 

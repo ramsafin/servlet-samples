@@ -51,8 +51,16 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        String exitParam = req.getParameter("exit");
+        HttpSession session  = req.getSession();
+        String exitParam     = req.getParameter("exit");
+        String deleteParam   = req.getParameter("delete");
+        String settingsParam = req.getParameter("settings");
+
+
+        if ("settings".equals(settingsParam)){
+            resp.sendRedirect("/profileSettings");
+            return;
+        }
 
         if ("exit".equals(exitParam)){
             //обнуляем куку
@@ -69,6 +77,31 @@ public class ProfileServlet extends HttpServlet {
             }
             session.setAttribute("user_a", null);
             resp.sendRedirect("/login");
+        }
+
+        if ("delete".equals(deleteParam)){
+            //обнуляем куку
+            Cookie[] cookies = req.getCookies();
+            if (cookies != null){
+                for (Cookie cookie : cookies){
+                    if (cookie.getName().equals("remember")){
+                        cookie.setMaxAge(0);
+                        cookie.setValue(null);
+                        resp.addCookie(cookie);
+                        break;
+                    }
+                }
+            }
+            try {
+                UserRepository.deleteUser((User)session.getAttribute("user_a"));
+            } catch (SQLException e) {
+                req.setAttribute("message","Some problems with server");
+                resp.sendRedirect("/profile");
+
+                e.printStackTrace();
+            }
+            session.setAttribute("user_a", null);
+            resp.sendRedirect("/welcome");
         }
     }
 }

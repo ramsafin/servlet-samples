@@ -121,7 +121,7 @@
 
                     <div class="panel panel-default">
 
-                        <div class="panel-heading" >
+                        <div class="panel-heading well" >
                             <h3 class="panel-title">&nbsp;Registration</h3>
                         </div>
 

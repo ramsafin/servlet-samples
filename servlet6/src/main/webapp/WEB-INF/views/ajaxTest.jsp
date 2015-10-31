@@ -12,6 +12,7 @@
 
     <script>
         $(document).ready(function(){
+            $.preventDefault();
 
             $('#myButton').click(function(){
 

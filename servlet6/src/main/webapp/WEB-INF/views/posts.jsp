@@ -7,6 +7,8 @@
     <link href="<c:url value="/resources/styles/css/bootstrap.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/styles/css/bootstrap-theme.css"/>" rel="stylesheet">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<c:url value="/resources/styles/css/scroll.css"/>">
+    <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.min.js"/>"></script>
 
     <title>posts</title>
 
@@ -21,6 +23,29 @@
             border-radius: 0;
         }
     </style>
+
+
+    <script>
+        //scroll
+        $( document ).ready(function() {
+            $('#scrollup').find('img').mouseover( function(){
+                $( this ).animate({opacity: 0.65},100);
+            }).mouseout( function(){
+                $( this ).animate({opacity: 1},100);
+            }).click( function(){
+                window.scroll(0 ,0);
+                return false;
+            });
+
+            $(window).scroll(function(){
+                if ( $(document).scrollTop() > 0 ) {
+                    $('#scrollup').fadeIn('fast');
+                } else {
+                    $('#scrollup').fadeOut('fast');
+                }
+            });
+        });
+    </script>
 
 </head>
 
@@ -125,8 +150,15 @@
                                 </div>
 
                                     <%--доп информация о посте--%>
-                                <div class="panel-footer" style="padding-bottom:30px;">
-                                    <span class="pull-right">
+                                <div class="panel-footer" style="padding-bottom:50px;">
+
+                                    <%-- Like --%>
+                                    <button class="submit pull-right btn btn-default well well-sm">
+                                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                                        <span id="likes">0</span>
+                                    </button>
+
+                                    <span class="pull-left">
                                         <p>Published time : <c:out value="${p.getPublishedTime()}"></c:out></p>
                                     </span>
                                 </div>
@@ -142,7 +174,7 @@
                             <form accept-charset="utf-8" action="<c:url value=""></c:url>" method="POST">
 
                                 <div class="form-group">
-                                    <label for="about">Write a post:</label>
+                                    <label class="well well-sm" for="about">Write a post:</label>
                                     <textarea  style="resize: none" name="post" class="form-control" rows="5" id="about"></textarea>
                                 </div>
 
@@ -172,6 +204,16 @@
         </div>
 
     </div>
+
+    <footer class="navbar">
+
+        <div id="scrollup">
+            <img alt="Прокрутить вверх" src="<c:url value="/resources/icons/up.png"/>">
+        </div>
+
+    </footer>
+
+
 
 </body>
 </html>
