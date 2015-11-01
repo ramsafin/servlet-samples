@@ -10,6 +10,8 @@
 
     <title>Profile</title>
 
+    <script type="text/javascript" language="JavaScript" src="<c:url value="/resources/js/counter.js"/> "></script>
+
     <style type="text/css">
         a{
             color : #fff;
@@ -39,28 +41,28 @@
                         <!--страницы куда можно перейти -->
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="<c:url value="/welcome"></c:url>">Welcome</a>
+                                <a href="<c:url value="/welcome"/>">Welcome</a>
                             </li>
 
                             <li>
-                                <a href="<c:url value="/profile"></c:url>">Profile</a>
+                                <a href="<c:url value="/profile"/>">Profile</a>
                             </li>
 
                             <li>
-                                <a href="<c:url value="/posts"></c:url>">Posts</a>
+                                <a href="<c:url value="/posts"/>">Posts</a>
                             </li>
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="<c:url value="/profile"></c:url>">
-                                    <c:out value="${user.getEmail()}"></c:out>
+                                <a href="<c:url value="/profile"/>">
+                                    <c:out value="${user.getEmail()}"/>
                                     &nbsp;<span class="glyphicon glyphicon-user"></span>
                                 </a>
                             </li>
 
                             <li>
-                                <form action="<c:url value=""></c:url>" method="post">
+                                <form action="<c:url value=""/>" method="post">
                                     <button  name="exit" value="exit" type="submit" class="btn btn-default navbar-btn"> Exit</button>
                                 </form>
                             </li>
@@ -74,12 +76,6 @@
             </nav>
 
         </div>
-
-
-
-
-
-
 
     </div>
 
@@ -124,7 +120,7 @@
 
                                 <div class=" col-md-9 col-lg-9 ">
 
-                                    <form name="settings_form" action='<c:url value=""></c:url>' method="POST" style="padding :15px;">
+                                    <form accept-charset="UTF-8" name="settings_form" action='<c:url value=""/>' method="POST" style="padding :15px;">
 
                                         <!-- two radios -->
                                         <div id="radios">
@@ -169,7 +165,7 @@
 
                                         <div class="form-group">
                                             <label for="about">About yourself:</label>
-                                            <textarea style="resize: none" name="about" class="form-control" rows="5" id="about" onkeyup="count(value)" maxlength="50"></textarea>
+                                            <textarea  style="resize: none" name="about" class="form-control" rows="5" id="about" onkeyup="count(value)" maxlength="50"></textarea>
                                             <p>symbols <b id="counter">0</b>/<b>50</b></p>
                                         </div>
 

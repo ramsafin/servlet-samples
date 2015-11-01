@@ -8,7 +8,8 @@
     <link href="<c:url value="/resources/styles/css/bootstrap.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/styles/css/bootstrap-theme.css"/>" rel="stylesheet">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
+    <script type="text/javascript" language="JavaScript" src="<c:url value="/resources/js/counter.js"/> "></script>
+    <script type="text/javascript" language="JavaScript" src="<c:url value="/resources/js/form_validate.js"/> "></script>
     <title>registration</title>
 
     <style type="text/css">
@@ -19,31 +20,6 @@
             border-radius: 0;
         }
     </style>
-
-    <script language="JavaScript">
-
-        function validate_form(){
-
-            var reg = /^([a-z0-9_\-]+\.)*[a-z0-9_\-]+@([a-z0-9][a-z0-9\-]*[a-z0-9]\.)+[a-z]{2,6}$/i;
-            if(!reg.test(document.reg_form.email.value)){
-                alert("Некорректный email! Введите еще раз!")
-                return false;
-            }
-
-            var inp = document.getElementsByName('sex');
-            if (!inp[0].checked && !inp[1].checked) {
-                alert("Выберите свой пол!!!");
-                return false;
-            }
-
-            return true;
-        }
-
-        function count (str) {
-            document.getElementById('counter').innerHTML=str.length;
-        }
-
-    </script>
 
 </head>
 <body>
@@ -65,15 +41,15 @@
                     <ul class="nav navbar-nav">
 
                         <li>
-                            <a href="<c:url value="/welcome"></c:url>">Welcome</a>
+                            <a href="<c:url value="/welcome"/>">Welcome</a>
                         </li>
 
                         <li>
-                            <a href="<c:url value="/profile"></c:url>">Profile</a>
+                            <a href="<c:url value="/profile"/>">Profile</a>
                         </li>
 
                         <li>
-                            <a href="<c:url value="/posts"></c:url>">Posts</a>
+                            <a href="<c:url value="/posts"/>">Posts</a>
                         </li>
                     </ul>
 
@@ -81,13 +57,13 @@
                     <ul class="nav navbar-nav navbar-right">
 
                         <li>
-                            <a href="<c:url value="/registration"></c:url>">
+                            <a href="<c:url value="/registration"/>">
                                 <span class="glyphicon glyphicon-user"></span> Sign Up
                             </a>
                         </li>
 
                         <li>
-                            <a href="<c:url value="/login"></c:url>">
+                            <a href="<c:url value="/login"/>">
                                 <span class="glyphicon glyphicon-log-in"></span> Login
                             </a>
                         </li>
@@ -107,7 +83,7 @@
 
         <c:if test="${not empty message}">
             <p style="text-align: center">
-                <c:out value="${message}"></c:out>
+                <c:out value="${message}"/>
             </p>
         </c:if>
 
@@ -128,7 +104,7 @@
                         <div class="panel-body">
                             <div class="row">
 
-                                <form name="reg_form" action='<c:url value=""></c:url>' onsubmit="return validate_form()" method="POST" style="padding :15px;">
+                                <form accept-charset="UTF-8" name="reg_form" action='<c:url value=""/>' onsubmit="return validate_form()" method="POST" style="padding :15px;">
                                     <!-- email field -->
                                     <div class="input-group">
                                         <span class="input-group-addon" id="at-addon">@</span>

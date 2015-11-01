@@ -43,15 +43,15 @@
                         <ul class="nav navbar-nav">
 
                             <li>
-                                <a href="<c:url value="/welcome"></c:url>">Welcome</a>
+                                <a href="<c:url value="/welcome"/>">Welcome</a>
                             </li>
 
                             <li>
-                                <a href="<c:url value="/profile"></c:url>">Profile</a>
+                                <a href="<c:url value="/profile"/>">Profile</a>
                             </li>
 
                             <li>
-                                <a href="<c:url value="/posts"></c:url>">Posts</a>
+                                <a href="<c:url value="/posts"/>">Posts</a>
                             </li>
                         </ul>
 
@@ -61,15 +61,15 @@
                             <!-- если пользователь вошел  -->
                             <c:if test="${not empty user}">
                                 <li>
-                                    <a href="<c:url value="/profile"></c:url>">
-                                        <c:out value="${user.getEmail()}"></c:out>
+                                    <a href="<c:url value="/profile"/>">
+                                        <c:out value="${user.getEmail()}"/>
                                         &nbsp;
                                         <span class="glyphicon glyphicon-user"></span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <form action="<c:url value=""></c:url>" method="post">
+                                    <form action="<c:url value=""/>" method="post">
                                         <button  name="exit" value="exit" type="submit" class="btn btn-default navbar-btn"> Exit</button>
                                     </form>
                                 </li>
@@ -78,13 +78,13 @@
                             <%--если вошел гость--%>
                             <c:if test="${empty user}">
                                 <li>
-                                    <a href="<c:url value="/registration"></c:url>">
+                                    <a href="<c:url value="/registration"/>">
                                         <span class="glyphicon glyphicon-user"></span> Sign Up
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="<c:url value="/login"></c:url>">
+                                    <a href="<c:url value="/login"/>">
                                         <span class="glyphicon glyphicon-log-in"></span> Login
                                     </a>
                                 </li>
@@ -140,7 +140,7 @@
                         <p>If you don't know how to start to learn Java<br>
                             you fell into good site.</p>
                         <p>Here we will help to begin.
-                            Just <a href='<c:url value="/registration"></c:url>' style="color:blue">sign up</a> and
+                            Just <a href='<c:url value="/registration"/>' style="color:blue">sign up</a> and
                             <br> you will see the result!
                     </div>
 

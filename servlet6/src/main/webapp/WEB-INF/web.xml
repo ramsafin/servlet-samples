@@ -22,7 +22,18 @@
         <servlet-class>ru.kpfu.itis.servlets.PostServlet</servlet-class>
     </servlet>
 
-
+    <servlet>
+        <servlet-name>authenticationServlet</servlet-name>
+        <servlet-class>ru.kpfu.itis.servlets.AuthenticationServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ajaxServlet</servlet-name>
+        <servlet-class>ru.kpfu.itis.servlets.AjaxServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>profileSettingsServlet</servlet-name>
+        <servlet-class>ru.kpfu.itis.servlets.ProfileSettingsServlet</servlet-class>
+    </servlet>
 
     <filter>
         <filter-name>Set Character Encoding</filter-name>
@@ -41,18 +52,9 @@
         <dispatcher>ERROR</dispatcher>
     </filter-mapping>
 
-    <servlet>
-        <servlet-name>authenticationServlet</servlet-name>
-        <servlet-class>ru.kpfu.itis.servlets.AuthenticationServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ajaxServlet</servlet-name>
-        <servlet-class>ru.kpfu.itis.servlets.AjaxServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>profileSettingsServlet</servlet-name>
-        <servlet-class>ru.kpfu.itis.servlets.ProfileSettingsServlet</servlet-class>
-    </servlet>
+
+
+
     <servlet-mapping>
         <servlet-name>welcomeServlet</servlet-name>
         <url-pattern>/welcome</url-pattern>

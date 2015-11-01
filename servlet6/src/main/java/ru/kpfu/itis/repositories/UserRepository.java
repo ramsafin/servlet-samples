@@ -115,16 +115,14 @@ public class UserRepository {
         return null;
     }
 
-
     public static void updateUser(User user) throws SQLException {
+        String s = "update users set sex = ? , about = ? , subscription = ?  where id = "+user.getId()+";";
+        PreparedStatement p = Database.getConnection().prepareStatement(s);
+        p.setString(1,user.getSex());
+        p.setNString(2,user.getAbout());
+        p.setString(3,user.getSubscription());
 
-         StringBuilder query = new StringBuilder("UPDATE users ")
-         .append("SET sex = '").append(user.getSex()).append("', about = '")
-         .append(user.getAbout()).append("',subscription = '")
-         .append(user.getSubscription()).append("'").append("WHERE id = ")
-         .append(user.getId()).append(";");
-
-        Database.getConnection().createStatement().executeUpdate(query.toString());
+        p.executeUpdate();
     }
 
 

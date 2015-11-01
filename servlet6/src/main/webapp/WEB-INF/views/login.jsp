@@ -40,15 +40,15 @@
                     <ul class="nav navbar-nav">
 
                         <li>
-                            <a href="<c:url value="/welcome"></c:url>">Welcome</a>
+                            <a href="<c:url value="/welcome"/>">Welcome</a>
                         </li>
 
                         <li>
-                            <a href="<c:url value="/profile"></c:url>">Profile</a>
+                            <a href="<c:url value="/profile"/>">Profile</a>
                         </li>
 
                         <li>
-                            <a href="<c:url value="/posts"></c:url>">Posts</a>
+                            <a href="<c:url value="/posts"/>">Posts</a>
                         </li>
                     </ul>
 
@@ -59,7 +59,7 @@
                         <c:if test="${not empty user}">
                             <li>
                                 <a href="#">
-                                    <c:out value="${user.getEmail()}"></c:out>
+                                    <c:out value="${user.getEmail()}"/>
                                     &nbsp;
                                     <span class="glyphicon glyphicon-user"></span>
                                 </a>
@@ -75,13 +75,13 @@
                         <%--если вошел гость--%>
                         <c:if test="${empty user}">
                             <li>
-                                <a href="<c:url value="/registration"></c:url>">
+                                <a href="<c:url value="/registration"/>">
                                     <span class="glyphicon glyphicon-user"></span> Sign Up
                                 </a>
                             </li>
 
                             <li>
-                                <a href="<c:url value="/login"></c:url>">
+                                <a href="<c:url value="/login"/>">
                                     <span class="glyphicon glyphicon-log-in"></span> Login
                                 </a>
                             </li>
@@ -118,7 +118,7 @@
                         <div class="panel-body">
                             <div class="row">
 
-                                <form name="reg_form" action='<c:url value=""></c:url>' onsubmit="return validate_form()" method="POST" style="padding :15px;">
+                                <form accept-charset="UTF-8" name="reg_form" action='<c:url value=""/>' onsubmit="return validate_form()" method="POST" style="padding :15px;">
 
                                     <div class="input-group">
                                         <span class="input-group-addon">@</span>
@@ -146,7 +146,7 @@
                                 <br>
                                 <c:if test="${not empty message}">
                                     <p style="text-align: center">
-                                        <c:out value="${message}"></c:out>
+                                        <c:out value="${message}"/>
                                     </p>
                                 </c:if>
                             </div>

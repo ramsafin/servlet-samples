@@ -7,8 +7,10 @@
     <link href="<c:url value="/resources/styles/css/bootstrap.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/styles/css/bootstrap-theme.css"/>" rel="stylesheet">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="<c:url value="/resources/styles/css/scroll.css"/>">
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.min.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/scroll.js"/> "></script>
 
     <title>posts</title>
 
@@ -23,29 +25,6 @@
             border-radius: 0;
         }
     </style>
-
-
-    <script>
-        //scroll
-        $( document ).ready(function() {
-            $('#scrollup').find('img').mouseover( function(){
-                $( this ).animate({opacity: 0.65},100);
-            }).mouseout( function(){
-                $( this ).animate({opacity: 1},100);
-            }).click( function(){
-                window.scroll(0 ,0);
-                return false;
-            });
-
-            $(window).scroll(function(){
-                if ( $(document).scrollTop() > 0 ) {
-                    $('#scrollup').fadeIn('fast');
-                } else {
-                    $('#scrollup').fadeOut('fast');
-                }
-            });
-        });
-    </script>
 
 </head>
 
@@ -67,15 +46,15 @@
                         <!--страницы куда можно перейти -->
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="<c:url value="/welcome"></c:url>">Welcome</a>
+                                <a href="<c:url value="/welcome"/>">Welcome</a>
                             </li>
 
                             <li>
-                                <a href="<c:url value="/profile"></c:url>">Profile</a>
+                                <a href="<c:url value="/profile"/>">Profile</a>
                             </li>
 
                             <li>
-                                <a href="<c:url value="/posts"></c:url>">Posts</a>
+                                <a href="<c:url value="/posts"/>">Posts</a>
                             </li>
                         </ul>
 
@@ -84,15 +63,15 @@
 
                             <c:if test="${not empty user}">
                                 <li>
-                                    <a href="<c:url value="/profile"></c:url>">
-                                        <c:out value="${user.getEmail()}"></c:out>
+                                    <a href="<c:url value="/profile"/>">
+                                        <c:out value="${user.getEmail()}"/>
                                         &nbsp;
                                         <span class="glyphicon glyphicon-user"></span>
                                     </a>
                                 </li>
 
                                 <li>
-                                    <form action="<c:url value=""></c:url>" method="post" style="padding-right: 17px;">
+                                    <form action="<c:url value=""/>" method="post" style="padding-right: 17px;">
                                         <button  name="exit" value="exit" type="submit" class="btn btn-default navbar-btn"> Exit</button>
                                     </form>
                                 </li>
@@ -101,13 +80,13 @@
                             <%--если вошел гость--%>
                             <c:if test="${empty user}">
                                 <li>
-                                    <a href="<c:url value="/registration"></c:url>">
+                                    <a href="<c:url value="/registration"/>">
                                         <span class="glyphicon glyphicon-user"></span> Sign Up
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a href="<c:url value="/login"></c:url>">
+                                    <a href="<c:url value="/login"/>">
                                         <span class="glyphicon glyphicon-log-in"></span> Login
                                     </a>
                                 </li>
@@ -123,6 +102,9 @@
 
         </div>
 
+        <div id="scrolldown">
+            <img alt="Прокрутить вниз" src="<c:url value="/resources/icons/down.png"/>">
+        </div>
 
         <div id="profile" style="padding-top:50px;">
 
@@ -140,13 +122,13 @@
 
                                 <div class="panel-heading" >
                                     <h1 class="panel-title">
-                                        <c:out value="${p.getUserName()}"></c:out>
+                                        <c:out value="${p.getUserName()}"/>
                                     </h1>
                                 </div>
 
                                     <%--текст поста--%>
                                 <div class="panel-body">
-                                    <p><c:out value="${p.getText()}"></c:out></p>
+                                    <p><c:out value="${p.getText()}"/></p>
                                 </div>
 
                                     <%--доп информация о посте--%>
@@ -159,7 +141,7 @@
                                     </button>
 
                                     <span class="pull-left">
-                                        <p>Published time : <c:out value="${p.getPublishedTime()}"></c:out></p>
+                                        <p>Published time : <c:out value="${p.getPublishedTime()}"/></p>
                                     </span>
                                 </div>
 
@@ -171,7 +153,7 @@
 
                         <div id="post">
 
-                            <form accept-charset="utf-8" action="<c:url value=""></c:url>" method="POST">
+                            <form accept-charset="UTF-8" action="<c:url value=""/>" method="POST">
 
                                 <div class="form-group">
                                     <label class="well well-sm" for="about">Write a post:</label>
@@ -187,7 +169,7 @@
 
                             <c:if test="${not empty message}">
                                 <p style="text-align: center">
-                                    <c:out value="${message}"></c:out>
+                                    <c:out value="${message}"/>
                                 </p>
                             </c:if>
 
