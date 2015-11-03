@@ -53,6 +53,26 @@ public class ProfileSettingsServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
 
+        String exitParam = req.getParameter("exit");
+
+        if ("exit".equals(exitParam)){
+            //обнуляем куку
+            Cookie[] cookies = req.getCookies();
+            if (cookies != null){
+                for (Cookie cookie : cookies){
+                    if (cookie.getName().equals("remember")){
+                        cookie.setMaxAge(0);
+                        cookie.setValue(null);
+                        resp.addCookie(cookie);
+                        break;
+                    }
+                }
+            }
+            session.setAttribute("user_a", null);
+            resp.sendRedirect("/login");
+            return;
+        }
+
         String sex = req.getParameter("sex");
         String subscription = req.getParameter("subscription") == null ? "off":"on";
         String about = req.getParameter("about");
@@ -71,5 +91,7 @@ public class ProfileSettingsServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+
+
     }
 }

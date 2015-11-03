@@ -11,22 +11,34 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <script>
+//        $(document).ready(function(){
+//            $('#myButton').click(function(){
+//
+//                $.getJSON('/ajaxServlet', {}, function(json){
+//                    $('h1').text(json.message.m1);
+//                });
+//                $('h1').css("text-align","center");
+//            })
+//        });
+
+
         $(document).ready(function(){
-            $.preventDefault();
 
-            $('#myButton').click(function(){
+            $('#myButton').click(function(e){
+                e.preventDefault();
 
-                if($('h1').text().length != 0){
-                    $('h1').text("");
-                    return;
-                }
-                $.getJSON('/example.json', {}, function(json){
+                $.post("<c:url value="/ajaxTest"/>", {"text":$('textarea').val()}, function(json){
+                    $('textarea').empty();
+                    $('h1').text(json.post);
+                },
 
-                    $('h1').text(json.message.m1 +"   "+json.message.m2);
+                'json'
 
-                    $('#info').css("text-align","center");
-                });
-            })
+                ).fail(function (){
+                    alert("fail(");
+                })
+
+            });
         });
 
     </script>
@@ -35,15 +47,19 @@
 
 </head>
 <body>
-    <div id="info">
-        <h1></h1>
-    </div>
 
-    <p style="text-align: center; padding-top: 20px;">
-        <button id="myButton" class="btn btn-primary btn-lg" type="submit">
-            Click me!
-        </button>
-    </p>
+    <h1></h1>
+
+    <form class="send-message" accept-charset="UTF-8" action="<c:url value=""/>" method="POST">
+
+        <div class="form-group">
+            <label class="well well-sm" for="text">Write a post:</label>
+            <textarea  style="resize: none" name="text" class="form-control" rows="5" id="text"></textarea>
+        </div>
+
+        <button  type="submit" id="myButton" class="btn btn-block btn-success">Отправить</button>
+
+    </form>
 
 </body>
 </html>

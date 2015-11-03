@@ -8,9 +8,11 @@
     <link href="<c:url value="/resources/styles/css/bootstrap.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/styles/css/bootstrap-theme.css"/>" rel="stylesheet">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
     <script type="text/javascript" language="JavaScript" src="<c:url value="/resources/js/counter.js"/> "></script>
     <script type="text/javascript" language="JavaScript" src="<c:url value="/resources/js/form_validate.js"/> "></script>
-    <title>registration</title>
+
+    <title>Registration</title>
 
     <style type="text/css">
         a{

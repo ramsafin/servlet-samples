@@ -59,8 +59,6 @@ public class RegistrationServlet extends HttpServlet {
         String subscription = req.getParameter("subscription") == null ? "off":"on";
         String about = req.getParameter("about");
 
-        System.out.println("i am in doPost registration");
-
 
         if (sex == null || "".equals(email) || "".equals(password) ){
 
@@ -87,7 +85,6 @@ public class RegistrationServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        System.out.println("to registration.jsp again ");
         req.getServletContext().getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req,resp);
     }
 }

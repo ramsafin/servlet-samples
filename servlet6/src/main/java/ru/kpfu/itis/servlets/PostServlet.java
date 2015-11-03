@@ -1,5 +1,6 @@
 package ru.kpfu.itis.servlets;
 
+import org.json.JSONObject;
 import ru.kpfu.itis.entities.Post;
 import ru.kpfu.itis.entities.User;
 import ru.kpfu.itis.repositories.PostRepository;
@@ -10,6 +11,7 @@ import ru.kpfu.itis.utilities.ServletUtilities;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,8 +93,34 @@ public class PostServlet extends HttpServlet {
             return;
         }
 
-        String textForPost = req.getParameter("post");
+        //Ajax
+        String textForPost = req.getParameter("text");
 
+        if ("".equals(textForPost) || textForPost == null){
+            return;
+        }
+
+        User user = (User)session.getAttribute("user_a");
+
+        Post post = new Post(textForPost,user.getId());
+        post.setUserName(user.getEmail());
+
+        try {
+            PostRepository.addPost(post);
+            String data = getJSON(post);
+            if ("".equals(data)){
+                return;
+            }
+            resp.setCharacterEncoding("utf-8");
+            resp.getWriter().write(data);
+
+        } catch (SQLException e) {
+            req.setAttribute("message","problems in server");
+            e.printStackTrace();
+        }
+
+
+/* Old version without Ajax
         if ( "".equals(textForPost)  || textForPost == null){
             req.setAttribute("message","write at least one symbol!");
             req.getServletContext().getRequestDispatcher("/WEB-INF/views/posts.jsp").forward(req,resp);
@@ -112,5 +140,26 @@ public class PostServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
+*/
+    }
+
+    private static String getJSON(Post post){
+
+        try(StringWriter sWriter  = new StringWriter()) {
+
+            JSONObject obj = new JSONObject();
+
+            obj.put("userName",post.getUserName());
+            obj.put("postText",post.getText());
+            obj.put("pTime",post.getPublishedTime());
+
+            obj.write(sWriter);
+
+            return sWriter.toString();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

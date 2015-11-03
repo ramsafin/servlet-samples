@@ -12,6 +12,61 @@
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/scroll.js"/> "></script>
 
+
+    <script language="JavaScript">
+        <%--add post ajax--%>
+        $(document).ready(function(){
+
+            $('#myButton').click(function(e){
+                e.preventDefault();
+                var textForPost = $('textarea').val();
+
+                if( !textForPost ){
+                    alert("Write down at least one symbol");
+                    return false;
+                }
+
+                $.post("<c:url value="/posts"/>", {"text":textForPost}, function(response){
+                            $('textarea#text').val('');
+                            $('#postPlace').append(
+
+                                    "<div class='panel panel-default'>"+
+
+                                    "<div class='panel-heading'>" +
+                                    "<h1 class='panel-title'>"+
+                                    "<p>"+response.userName+"</p>"+
+                                    "</h1>"+
+                                    "</div>"+
+
+                                    "<div class='panel-body'>"+
+                                    "<p>"+ response.postText+"</p>"+
+                                    "</div>"+
+
+                                    "<div class='panel-footer' style='padding-bottom:50px;'>"+
+
+                                    "<button class='submit pull-right btn btn-default well well-sm'>"+
+                                    "<span class='glyphicon glyphicon-thumbs-up'></span>"+
+                                    "<span id='likes'>0</span>"+
+                                    "</button>"+
+
+                                    "<span class='pull-left'>"+
+                                    "Published time : "+
+                                            "<p>"+response.pTime+"</p>"+
+                                    "</span>"+
+                                    "</div>"
+                            );
+                        },
+
+                        'json'
+
+                ).fail(function (){
+                            alert("Sorry, can't send a post. Try again!");
+                        })
+            });
+        });
+
+    </script>
+
     <title>posts</title>
 
     <style type="text/css">
@@ -116,51 +171,56 @@
 
                     <div class="col-md-8">
 
-                        <c:forEach items="${posts}" var="p">
+                        <div id="postPlace">
 
-                            <div class="panel panel-default">
+                            <c:forEach items="${posts}" var="p">
 
-                                <div class="panel-heading" >
-                                    <h1 class="panel-title">
-                                        <c:out value="${p.getUserName()}"/>
-                                    </h1>
-                                </div>
+                                <div class="panel panel-default">
 
-                                    <%--текст поста--%>
-                                <div class="panel-body">
-                                    <p><c:out value="${p.getText()}"/></p>
-                                </div>
+                                    <div class="panel-heading" >
+                                        <h1 class="panel-title">
+                                            <c:out value="${p.getUserName()}"/>
+                                        </h1>
+                                    </div>
 
-                                    <%--доп информация о посте--%>
-                                <div class="panel-footer" style="padding-bottom:50px;">
+                                        <%--текст поста--%>
+                                    <div class="panel-body">
+                                        <p><c:out value="${p.getText()}"/></p>
+                                    </div>
 
-                                    <%-- Like --%>
-                                    <button class="submit pull-right btn btn-default well well-sm">
-                                        <span class="glyphicon glyphicon-thumbs-up"></span>
-                                        <span id="likes">0</span>
-                                    </button>
+                                        <%--доп информация о посте--%>
+                                    <div class="panel-footer" style="padding-bottom:50px;">
+
+                                            <%-- Like --%>
+                                        <button class="submit pull-right btn btn-default well well-sm">
+                                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                                            <span id="likes">0</span>
+                                        </button>
 
                                     <span class="pull-left">
                                         <p>Published time : <c:out value="${p.getPublishedTime()}"/></p>
                                     </span>
+                                    </div>
+
                                 </div>
 
-                            </div>
+                            </c:forEach>
 
-                        </c:forEach>
+                        </div>
 
                         <br>
 
                         <div id="post">
 
-                            <form accept-charset="UTF-8" action="<c:url value=""/>" method="POST">
+                            <form class="send-message" accept-charset="UTF-8" action="<c:url value=""/>" method="POST">
 
                                 <div class="form-group">
-                                    <label class="well well-sm" for="about">Write a post:</label>
-                                    <textarea  style="resize: none" name="post" class="form-control" rows="5" id="about"></textarea>
+                                    <div class="notice"></div>
+                                    <label class="well well-sm" for="text">Write something:</label>
+                                    <textarea style="resize: none" name="post" class="form-control" rows="5" id="text"></textarea>
                                 </div>
 
-                                <button  type="submit" class="btn btn-block btn-success">publish</button>
+                                <button  type="submit" id="myButton" class="btn btn-block btn-success">Send</button>
 
                             </form>
 
