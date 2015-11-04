@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta content="text/html" charset="utf-8">
 
     <link href="<c:url value="/resources/styles/css/bootstrap.css"/>" rel="stylesheet">
@@ -21,6 +22,7 @@
     </style>
 
 </head>
+
 <body>
 
     <div id="wrapper">
@@ -78,9 +80,7 @@
 
         </div>
 
-
         <!--profile panel -->
-
         <div id="profile" style="padding-top:50px;">
 
             <div class="container">
@@ -91,8 +91,9 @@
                         <p> <h3>User profile</h3>
                     </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                    <div class="col-sm-3"></div>
 
+                    <div class="col-sm-6">
 
                         <div class="panel panel-default">
 
@@ -106,18 +107,21 @@
 
                                     <div class="col-md-3 col-lg-3 " align="center">
 
-                                        <c:if test="${user.getSex().equals('male')}">
-                                            <img alt="User Pic" src="<c:url value="/resources/icons/male.png"/> "
-                                                 class="img-circle img-responsive">
-                                        </c:if>
+                                        <c:choose>
 
-                                        <c:if test="${user.getSex().equals('female')}">
-                                            <img alt="User Pic" src="<c:url value="/resources/icons/female.png"/> "
-                                                 class="img-circle img-responsive">
-                                        </c:if>
+                                            <c:when test="${user.getSex().equals('male')}">
+                                                <img alt="User Pic" src="<c:url value="/resources/icons/male.png"/> "
+                                                     class="img-circle img-responsive">
+                                            </c:when>
+
+                                            <c:when test="${user.getSex().equals('female')}">
+                                                <img alt="User Pic" src="<c:url value="/resources/icons/female.png"/> "
+                                                     class="img-circle img-responsive">
+                                            </c:when>
+
+                                        </c:choose>
 
                                     </div>
-
 
                                     <div class=" col-md-9 col-lg-9 ">
 
@@ -142,13 +146,21 @@
                                                 <td>Subscription</td>
                                                 <td>
 
-                                                    <c:if test="${user.getSubscription().equals('on')}">
-                                                        you are subscribed!
-                                                    </c:if>
+                                                    <c:choose>
 
-                                                    <c:if test="${user.getSubscription().equals('off')}">
-                                                        <p>you are not subscribed!</p>
-                                                    </c:if>
+                                                        <c:when test="${user.getSubscription().equals('on')}">
+                                                            <p>you are subscribed!</p>
+                                                        </c:when>
+
+                                                        <c:when test="${user.getSubscription().equals('off')}">
+                                                            <p>you are not subscribed!</p>
+                                                        </c:when>
+
+                                                        <c:otherwise>
+                                                            <p>secret</p>
+                                                        </c:otherwise>
+
+                                                    </c:choose>
 
                                                 </td>
                                             </tr>
@@ -156,7 +168,16 @@
                                             <tr>
                                                 <td>About me:</td>
                                                 <td>
-                                                    <c:out value="${user.getAbout()}"/>
+                                                    <c:choose>
+                                                        <c:when test="${not empty user.getAbout()}">
+                                                            <p><c:out value="${user.getAbout()}"/></p>
+                                                        </c:when>
+
+                                                        <c:otherwise>
+                                                            <p>Empty</p>
+                                                        </c:otherwise>
+
+                                                    </c:choose>
                                                 </td>
                                             </tr>
 
@@ -170,8 +191,9 @@
 
                             <div class="panel-footer">
 
-                                        <form accept-charset="UTF-8" method="POST" action="<c:url value=""/>">
+                                <form accept-charset="UTF-8" method="POST" action="<c:url value=""/>">
 
+                                            <%--user deleting button--%>
                                             <span>
                                                 <button
                                                     type="submit" name="delete" value="delete" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i>
@@ -179,7 +201,7 @@
                                                 </button>
                                             </span>
 
-                                            <!--сслыка на сервлет по изменению профиля -->
+                                            <!--profile settings button -->
                                             <span class="pull-right">
                                                  <button
                                                      type="submit" name="settings" value="settings" class="btn btn-sm btn-info"><i class="glyphicon glyphicon-cog"></i>
@@ -188,11 +210,14 @@
                                             </span>
 
                                         </form>
+
                             </div>
 
                         </div>
 
                     </div>
+
+                    <div class="col-sm-3"></div>
 
                     <!-- row ends -->
                 </div>
@@ -204,4 +229,5 @@
     </div>
 
 </body>
+
 </html>

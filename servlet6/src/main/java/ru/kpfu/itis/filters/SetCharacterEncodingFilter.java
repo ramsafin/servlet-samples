@@ -1,4 +1,4 @@
-package ru.kpfu.itis;
+package ru.kpfu.itis.filters;
 
 import javax.servlet.*;
 import java.io.IOException;

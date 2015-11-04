@@ -1,6 +1,7 @@
 package ru.kpfu.itis.repositories;
 
 import ru.kpfu.itis.entities.Post;
+import ru.kpfu.itis.entities.User;
 import ru.kpfu.itis.utilities.Database;
 
 import java.sql.*;
@@ -8,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class PostRepository {
+
 
     public static void addPost(Post post) throws SQLException {
 
@@ -25,6 +27,17 @@ public class PostRepository {
     }
 
 
+    //в разработке
+    public static void removePost(Post post) throws SQLException {
+
+        String s = "delete from posts where id = ?";
+        PreparedStatement p = Database.getConnection().prepareStatement(s);
+
+        p.setInt(1,post.getId());
+
+        p.executeUpdate();
+    }
+
 
     public static List<Post> getAllPosts() throws SQLException {
 
@@ -40,9 +53,12 @@ public class PostRepository {
             int user_id = set.getInt(4);
 
             Post post = new Post(id,text,date.toString()+"  " + time.toString(),user_id);
-            post.setUserName(UserRepository.getUserById(user_id).getEmail());
+            User user = UserRepository.getUserById(user_id);
+            if (user != null){
+                post.setUserName(user.getEmail());
 
-            posts.add(post);
+                posts.add(post);
+            }
         }
         return posts;
     }

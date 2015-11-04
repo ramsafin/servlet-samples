@@ -16,12 +16,16 @@ import java.util.regex.Pattern;
 
 public class UserRepository {
 
+    /**
+     * Method adding user to DB
+     * @param user - entity to add to DB
+     */
 
     public static void addUser(User user) throws DatabaseException, NotValidEmailException,
             NotValidPasswordException, SecurityException, SQLException {
 
-        checkUserEmail(user.getEmail());
-        checkUserPassword(user.getPassword());
+        checkUserEmail(user.getEmail()); //checking an email
+        checkUserPassword(user.getPassword()); //checking a password
 
         //меняем пароль на hashcode (password+salt)
         String safety[] = SecurityService.hash(user.getPassword());
@@ -97,9 +101,11 @@ public class UserRepository {
 
 
     public static User getUserById(int id) throws SQLException {
+        String s = "select * from users where `id` = ?;";
+        PreparedStatement ps = Database.getConnection().prepareStatement(s);
+        ps.setInt(1, id);
 
-      ResultSet set =   Database.getConnection().createStatement()
-              .executeQuery("select * from users where id = " + "'" + id + "';");
+        ResultSet set = ps.executeQuery();
 
         if (set.next()){
             int cID      = set.getInt(1);
@@ -116,7 +122,7 @@ public class UserRepository {
     }
 
     public static void updateUser(User user) throws SQLException {
-        String s = "update users set sex = ? , about = ? , subscription = ?  where id = "+user.getId()+";";
+        String s = "update users set `sex` = ? , `about` = ? , `subscription` = ?  where `id` = "+user.getId()+";";
         PreparedStatement p = Database.getConnection().prepareStatement(s);
         p.setString(1,user.getSex());
         p.setNString(2,user.getAbout());
@@ -128,13 +134,14 @@ public class UserRepository {
 
     public static void updateUserCookie(User user, Cookie cookie) throws SQLException {
 
-        StringBuilder query = new StringBuilder("");
-        query.append("update users");
-        query.append(" set ").append(cookie.getName()).append(" = ").append("'")
-                .append(cookie.getValue()).append("'");
-        query.append(" where ").append("id = ").append(user.getId()).append(";");
+        String s = "update users set `remember` = ? where `id` = ? ;";
+        PreparedStatement p = Database.getConnection().prepareStatement(s);
 
-        Database.getConnection().createStatement().executeUpdate(query.toString());
+        p.setString(1,cookie.getValue());
+        p.setInt(2,user.getId());
+
+        p.executeUpdate();
+
     }
 
 

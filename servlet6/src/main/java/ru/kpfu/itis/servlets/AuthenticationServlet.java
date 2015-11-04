@@ -44,7 +44,11 @@ public class AuthenticationServlet extends HttpServlet {
                 }
             }
 
-            req.getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
+            if ("ok".equals(req.getParameter("status"))){
+                req.setAttribute("message","you are successfully registered");
+            }
+
+            getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
         }else {
             //пересылаем на профиль
             resp.sendRedirect("/profile");
@@ -62,27 +66,33 @@ public class AuthenticationServlet extends HttpServlet {
         if ("".equals(email) || "".equals(password) ){
             req.setAttribute("message","Enter email and password");
         }else {
+
             try {
+
                 User user = IdentificationService.identification(email,password);
                 session.setAttribute("user_a",user);
 
                 //если нужно запомнить user`а и он прошел идентификацию
                 if (remember != null){
+
                     Cookie cookie = new Cookie("remember", SecurityService.genRndHash(12));
                     cookie.setMaxAge(60*60*48);
                     UserRepository.updateUserCookie(user,cookie);
                     resp.addCookie(cookie);
 
                 }
+
                 resp.sendRedirect("/profile");
                 return;
+
             } catch (IdentifyingException e) {
                 req.setAttribute("message",e.getMessage());
             } catch (SecurityException | SQLException e) {
                 req.setAttribute("message","some problems in server(");
                 e.printStackTrace();
             }
+
         }
-        req.getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req,resp);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req,resp);
     }
 }

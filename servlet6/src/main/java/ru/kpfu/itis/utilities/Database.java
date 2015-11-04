@@ -3,20 +3,22 @@ package ru.kpfu.itis.utilities;
 import java.sql.*;
 
 
+
 public final class Database {
 
     private Connection conn;
-
     private static Database database;
 
+    private static final String URL           = "jdbc:mysql://localhost:3306/";
+    private static final String DATABASE_NAME = "server_db";
+    private static final String USER_NAME     = "root";
+    private static final String PASSWORD      = "armin";
+
+
     private Database() {
-        String url= "jdbc:mysql://localhost:3306/";
-        String dbName = "server_db";
-        String userName = "root";
-        String password = "armin";
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
-            this.conn = DriverManager.getConnection(url+dbName,userName,password);
+            this.conn = DriverManager.getConnection(URL+DATABASE_NAME,USER_NAME,PASSWORD);
         }
         catch (Exception e) {
             e.printStackTrace();

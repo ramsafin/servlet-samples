@@ -32,7 +32,6 @@ public class WelcomeServlet extends HttpServlet {
                         UserRepository.updateUserCookie(user,newCookie);
                         resp.addCookie(newCookie);
                         session.setAttribute("user_a",user);
-                        req.setAttribute("entered_user",user);
                         resp.sendRedirect("/welcome");
                         return;
                     }
@@ -46,11 +45,12 @@ public class WelcomeServlet extends HttpServlet {
             req.setAttribute("user",session.getAttribute("user_a"));
         }
 
-        req.getServletContext().getRequestDispatcher("/WEB-INF/views/welcome.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/welcome.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         HttpSession session = req.getSession();
         String exitParam = req.getParameter("exit");
 

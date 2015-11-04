@@ -3,7 +3,7 @@ $( document ).ready(function() {
 
 
     $('#scrollup').find('img').mouseover( function(){
-        $( this ).animate({opacity: 0.60},100);
+        $( this ).animate({opacity: 0.50},{},100);
     }).mouseout( function(){
         $( this ).animate({opacity: 1},100);
     }).click( function(){
@@ -13,7 +13,7 @@ $( document ).ready(function() {
 
 
     $('#scrolldown').find('img').mouseover( function(){
-        $( this ).animate({opacity: 0.60},100);
+        $( this ).animate({opacity: 0.50},100);
     }).mouseout( function(){
         $( this ).animate({opacity: 1},100);
     }).click( function(){
@@ -22,7 +22,7 @@ $( document ).ready(function() {
     });
 
 
-    //scrolling funcs
+    //scrolling func-s
     $(window).scroll(function(){
         if ( $(document).scrollTop() > 0 ) {
             $('#scrollup').stop().fadeIn('slow');
@@ -30,7 +30,7 @@ $( document ).ready(function() {
             $('#scrollup').stop().fadeOut('slow');
         }
 
-        if ( $(document).scrollTop() > 0 && $(document).scrollTop() < $(document).height()-708 ) {
+        if ( $(document).scrollTop() > 0 && $(document).scrollTop() < $(document).height()-760 ) {
             $('#scrolldown').stop().fadeIn('slow');
         } else {
             $('#scrolldown').stop().fadeOut('slow');

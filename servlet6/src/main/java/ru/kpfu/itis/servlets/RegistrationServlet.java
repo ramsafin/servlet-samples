@@ -43,7 +43,7 @@ public class RegistrationServlet extends HttpServlet {
                 }
             }
 
-            req.getServletContext().getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req,resp);
+            getServletContext().getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req,resp);
         }else {
             resp.sendRedirect("/welcome");
         }
@@ -68,15 +68,16 @@ public class RegistrationServlet extends HttpServlet {
 
             //пытаемся добавить пользователя
             try{
+
                 UserRepository.addUser( new User(email,password,sex,subscription,about) );
-                System.out.println("i am in doPost registration added user ");
-                  resp.sendRedirect("/login");
+                resp.sendRedirect("/login?status=ok");
                 return;
+
             } catch (NotValidPasswordException | NotValidEmailException | DatabaseException e) {
                 req.setAttribute("message",e.getMessage());
 
             } catch (SQLException e) {
-                //duplicate error code
+                //duplicate sql error code
                 if (e.getErrorCode() == 1062){
                     req.setAttribute("message","user already exists");
                 }
@@ -85,6 +86,6 @@ public class RegistrationServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        req.getServletContext().getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req,resp);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req,resp);
     }
 }

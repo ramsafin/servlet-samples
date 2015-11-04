@@ -37,7 +37,7 @@
 
     <filter>
         <filter-name>Set Character Encoding</filter-name>
-        <filter-class>ru.kpfu.itis.SetCharacterEncodingFilter</filter-class>
+        <filter-class>ru.kpfu.itis.filters.SetCharacterEncodingFilter</filter-class>
         <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>

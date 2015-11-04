@@ -44,7 +44,7 @@ public class ProfileSettingsServlet extends HttpServlet {
             resp.sendRedirect("/login");
         }else {
             req.setAttribute("user", session.getAttribute("user_a"));
-            req.getServletContext().getRequestDispatcher("/WEB-INF/views/profileSettings.jsp").forward(req,resp);
+            getServletContext().getRequestDispatcher("/WEB-INF/views/profileSettings.jsp").forward(req,resp);
         }
     }
 
@@ -91,7 +91,6 @@ public class ProfileSettingsServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-
 
     }
 }

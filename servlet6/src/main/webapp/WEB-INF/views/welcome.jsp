@@ -3,7 +3,9 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
+
     <meta content="text/html" charset="utf-8">
 
     <link href="<c:url value="/resources/styles/css/bootstrap.css"/>" rel="stylesheet">
@@ -23,6 +25,7 @@
     </style>
 
 </head>
+
 <body>
 
     <div id="wrapper">
@@ -105,11 +108,11 @@
             <h1>Programming in Java</h1>
         </div>
 
-
         <div id="main">
 
             <div class="container" style="margin-top : 30px;">
 
+                <%--jumbotron--%>
                 <div class="jumbotron">
                     <h1>Java programming!</h1>
                     <p>Hello my dear friend!<br>You are in java language programming web site</p>

@@ -58,14 +58,17 @@ public class PostServlet extends HttpServlet {
 
             //все посты всех юзеров
             List<Post> posts = new ArrayList<>();
+
             try {
                 posts = PostRepository.getAllPosts();
+
             } catch (SQLException e) {
                 req.setAttribute("message","Sorry, some problems with server(");
                 e.printStackTrace();
             }
+
             req.setAttribute("posts", posts);
-            req.getServletContext().getRequestDispatcher("/WEB-INF/views/posts.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher("/WEB-INF/views/posts.jsp").forward(req, resp);
         }
     }
 
@@ -112,6 +115,7 @@ public class PostServlet extends HttpServlet {
                 return;
             }
             resp.setCharacterEncoding("utf-8");
+            resp.setContentType("application/json");
             resp.getWriter().write(data);
 
         } catch (SQLException e) {

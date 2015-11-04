@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="<c:url value="/resources/styles/css/bootstrap.css"/>" rel="stylesheet">
     <link href="<c:url value="/resources/styles/css/bootstrap-theme.css"/>" rel="stylesheet">
@@ -14,7 +15,7 @@
 
 
     <script language="JavaScript">
-        <%--add post ajax--%>
+        <%--add post with ajax--%>
         $(document).ready(function(){
 
             $('#myButton').click(function(e){
@@ -55,6 +56,7 @@
                                     "</span>"+
                                     "</div>"
                             );
+                            $("html,body").animate({scrollTop:$(document).height()},"slow");
                         },
 
                         'json'
@@ -78,6 +80,12 @@
         }
         .navbar-inverse{
             border-radius: 0;
+        }
+
+        #likes{
+            border-radius: 10px;
+            border-collapse: collapse;
+            outline: none;
         }
     </style>
 
@@ -157,10 +165,6 @@
 
         </div>
 
-        <div id="scrolldown">
-            <img alt="Прокрутить вниз" src="<c:url value="/resources/icons/down.png"/>">
-        </div>
-
         <div id="profile" style="padding-top:50px;">
 
             <div class="container">
@@ -183,23 +187,25 @@
                                         </h1>
                                     </div>
 
-                                        <%--текст поста--%>
+                                    <%--posts text--%>
                                     <div class="panel-body">
                                         <p><c:out value="${p.getText()}"/></p>
                                     </div>
 
-                                        <%--доп информация о посте--%>
+                                    <%--information about post--%>
                                     <div class="panel-footer" style="padding-bottom:50px;">
 
-                                            <%-- Like --%>
-                                        <button class="submit pull-right btn btn-default well well-sm">
+                                        <%-- Like --%>
+                                        <button id="likes" class="submit pull-right btn btn-default well well-sm">
                                             <span class="glyphicon glyphicon-thumbs-up"></span>
-                                            <span id="likes">0</span>
+                                            <span id="likesCount">0</span>
                                         </button>
 
-                                    <span class="pull-left">
-                                        <p>Published time : <c:out value="${p.getPublishedTime()}"/></p>
-                                    </span>
+                                        <%--date and time of publishing--%>
+                                        <span class="pull-left">
+                                            <p>Published time :<br> <c:out value="${p.getPublishedTime()}"/></p>
+                                        </span>
+
                                     </div>
 
                                 </div>
@@ -215,9 +221,8 @@
                             <form class="send-message" accept-charset="UTF-8" action="<c:url value=""/>" method="POST">
 
                                 <div class="form-group">
-                                    <div class="notice"></div>
                                     <label class="well well-sm" for="text">Write something:</label>
-                                    <textarea style="resize: none" name="post" class="form-control" rows="5" id="text"></textarea>
+                                    <textarea spellcheck="false" style="resize: none" name="post" class="form-control" rows="5" id="text"></textarea>
                                 </div>
 
                                 <button  type="submit" id="myButton" class="btn btn-block btn-success">Send</button>
@@ -245,17 +250,20 @@
 
         </div>
 
+        <footer class="navbar">
+
+            <div id="scrolldown">
+                <img alt="Прокрутить вниз" src="<c:url value="/resources/icons/down.png"/>">
+            </div>
+
+
+            <div id="scrollup">
+                <img alt="Прокрутить вверх" src="<c:url value="/resources/icons/up.png"/>">
+            </div>
+
+        </footer>
+
     </div>
-
-    <footer class="navbar">
-
-        <div id="scrollup">
-            <img alt="Прокрутить вверх" src="<c:url value="/resources/icons/up.png"/>">
-        </div>
-
-    </footer>
-
-
 
 </body>
 </html>

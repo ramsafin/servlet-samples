@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta content="text/html" charset="utf-8">
 
     <link href="<c:url value="/resources/styles/css/bootstrap.css"/>" rel="stylesheet">
@@ -21,163 +22,168 @@
     </style>
 
 </head>
+
 <body>
-<div id="wrapper">
 
-    <div id="navbar-top">
+    <div id="wrapper">
 
-        <nav class="navbar navbar-inverse">
+        <div id="navbar-top">
 
-            <div class="container-fluid">
+            <nav class="navbar navbar-inverse">
 
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="http://study.istamendil.info/">ITIS programming 3</a>
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="http://study.istamendil.info/">ITIS programming 3</a>
+                    </div>
+
+                    <div class="collapse navbar-collapse">
+
+                        <!--страницы куда можно перейти -->
+                        <ul class="nav navbar-nav">
+
+                            <li>
+                                <a href="<c:url value="/welcome"/>">Welcome</a>
+                            </li>
+
+                            <li>
+                                <a href="<c:url value="/profile"/>">Profile</a>
+                            </li>
+
+                            <li>
+                                <a href="<c:url value="/posts"/>">Posts</a>
+                            </li>
+                        </ul>
+
+                        <!-- вход и регистрация -->
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <!-- если пользователь вошел  -->
+                            <c:if test="${not empty user}">
+                                <li>
+                                    <a href="#">
+                                        <c:out value="${user.getEmail()}"/>
+                                        &nbsp;
+                                        <span class="glyphicon glyphicon-user"></span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <span class=" glyphicon glyphicon-log-out"></span> Exit
+                                    </a>
+                                </li>
+                            </c:if>
+
+                            <%--если вошел гость--%>
+                            <c:if test="${empty user}">
+                                <li>
+                                    <a href="<c:url value="/registration"/>">
+                                        <span class="glyphicon glyphicon-user"></span> Sign Up
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="<c:url value="/login"/>">
+                                        <span class="glyphicon glyphicon-log-in"></span> Login
+                                    </a>
+                                </li>
+                            </c:if>
+
+                        </ul>
+
+                    </div>
+
                 </div>
 
-                <div class="collapse navbar-collapse">
+            </nav>
 
-                    <!--страницы куда можно перейти -->
-                    <ul class="nav navbar-nav">
+            <%--end id navbar-top--%>
+        </div>
 
-                        <li>
-                            <a href="<c:url value="/welcome"/>">Welcome</a>
-                        </li>
+        <div id="profile" style="padding-top:50px;">
 
-                        <li>
-                            <a href="<c:url value="/profile"/>">Profile</a>
-                        </li>
+            <div class="container">
 
-                        <li>
-                            <a href="<c:url value="/posts"/>">Posts</a>
-                        </li>
-                    </ul>
+                <div class="row">
 
-                    <!-- вход и регистрация -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <div class="col-md-3"></div>
 
-                        <!-- если пользователь вошел  -->
-                        <c:if test="${not empty user}">
-                            <li>
-                                <a href="#">
-                                    <c:out value="${user.getEmail()}"/>
-                                    &nbsp;
-                                    <span class="glyphicon glyphicon-user"></span>
-                                </a>
-                            </li>
+                    <div class="col-md-6">
 
-                            <li>
-                                <a href="#">
-                                    <span class=" glyphicon glyphicon-log-out"></span> Exit
-                                </a>
-                            </li>
-                        </c:if>
+                        <div class="panel panel-default">
 
-                        <%--если вошел гость--%>
-                        <c:if test="${empty user}">
-                            <li>
-                                <a href="<c:url value="/registration"/>">
-                                    <span class="glyphicon glyphicon-user"></span> Sign Up
-                                </a>
-                            </li>
+                            <div class="panel-heading well" >
+                                <h3 class="panel-title">&nbsp;Login</h3>
+                            </div>
 
-                            <li>
-                                <a href="<c:url value="/login"/>">
-                                    <span class="glyphicon glyphicon-log-in"></span> Login
-                                </a>
-                            </li>
-                        </c:if>
+                            <div class="panel-body">
 
-                    </ul>
+                                <div class="row">
 
-                </div>
+                                    <form accept-charset="UTF-8" name="reg_form" action='<c:url value=""/>' onsubmit="return validate_form()" method="POST" style="padding :15px;">
 
-            </div>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">@</span>
+                                            <input id="email" type="text" name="email" class="form-control" placeholder="email@example.com">
+                                        </div>
 
-        </nav>
+                                        <br>
 
-        <%--end id navbar-top--%>
-    </div>
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                                        </div>
 
-    <div id="profile" style="padding-top:50px;">
+                                        <div class="checkbox">
+                                            <label for="remember">
+                                                <input id="remember" name="remember" type="checkbox"> remember me
+                                            </label>
+                                        </div>
+                                        <br>
+                                        <button id="button" type="submit" class="btn btn-block btn-primary">Submit</button>
 
-        <div class="container">
-
-            <div class="row">
-
-                <div class="col-md-3"></div>
-
-                <div class="col-md-6">
-
-
-                    <div class="panel panel-default">
-
-                        <div class="panel-heading well" >
-                            <h3 class="panel-title">&nbsp;Login</h3>
-                        </div>
-
-                        <div class="panel-body">
-                            <div class="row">
-
-                                <form accept-charset="UTF-8" name="reg_form" action='<c:url value=""/>' onsubmit="return validate_form()" method="POST" style="padding :15px;">
-
-                                    <div class="input-group">
-                                        <span class="input-group-addon">@</span>
-                                        <input id="email" type="text" name="email" class="form-control" placeholder="email@example.com">
-                                    </div>
+                                    </form>
 
                                     <br>
-
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
-                                    </div>
-
-                                    <div class="checkbox">
-                                        <label for="remember">
-                                            <input id="remember" name="remember" type="checkbox"> remember me
-                                        </label>
-                                    </div>
                                     <br>
-                                    <button id="button" type="submit" class="btn btn-block btn-primary">Submit</button>
 
-                                </form>
+                                    <c:if test="${not empty message}">
+                                        <p style="text-align: center">
+                                            <c:out value="${message}"/>
+                                        </p>
+                                    </c:if>
+                                </div>
 
-                                <br>
-                                <br>
-                                <c:if test="${not empty message}">
-                                    <p style="text-align: center">
-                                        <c:out value="${message}"/>
-                                    </p>
-                                </c:if>
                             </div>
 
                         </div>
 
                     </div>
 
+                    <div class="col-md-3"></div>
+
+                    <!-- row ends -->
                 </div>
 
-                <div class="col-md-3"></div>
-
-                <!-- row ends -->
             </div>
 
         </div>
+
+
+        <footer class="footer" style="margin-top: 140px;">
+            <div class="container">
+                <div class="text-right">
+                    <hr>
+                    <p class="text-muted">&copy; Copyright 2015 Ramil Safin</p>
+                    <hr>
+                </div>
+            </div>
+        </footer>
+
+        <!--end of wrapper -->
     </div>
 
-
-    <footer class="footer" style="margin-top: 140px;">
-        <div class="container">
-            <div class="text-right">
-                <hr>
-                <p class="text-muted">&copy; Copyright 2015 Ramil Safin</p>
-                <hr>
-            </div>
-        </div>
-    </footer>
-
-    <!--end of wrapper -->
-</div>
-
 </body>
+
 </html>

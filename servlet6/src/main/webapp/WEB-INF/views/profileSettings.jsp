@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <html>
 <head>
+
     <meta content="text/html" charset="utf-8">
 
     <link href="<c:url value="/resources/styles/css/bootstrap.css"/>" rel="stylesheet">
@@ -22,6 +23,7 @@
     </style>
 
 </head>
+
 <body>
 
     <div id="wrapper">
@@ -37,6 +39,7 @@
                     </div>
 
                     <div class="collapse navbar-collapse" id="myNavbar">
+
                         <!--страницы куда можно перейти -->
                         <ul class="nav navbar-nav">
                             <li>
@@ -54,6 +57,7 @@
 
                         <!-- вход и регистрация -->
                         <ul class="nav navbar-nav navbar-right">
+
                             <li>
                                 <a href="<c:url value="/profile"/>">
                                     <c:out value="${user.getEmail()}"/>
@@ -61,9 +65,8 @@
                                 </a>
                             </li>
 
+                            <%--exit from profile button--%>
                             <li>
-
-
                                 <form action="<c:url value=""/>" method="post">
                                     <button  name="exit" value="exit" type="submit" class="btn btn-default navbar-btn"> Exit</button>
                                 </form>
@@ -91,8 +94,9 @@
                         </h3>
                     </div>
 
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+                    <div class=" col-sm-3"></div>
 
+                    <div class=" col-sm-6" >
 
                         <div class="panel panel-default">
 
@@ -106,47 +110,60 @@
 
                                     <div class="col-md-3 col-lg-3 " align="center">
 
-                                        <c:if test="${user.getSex().equals('male')}">
-                                            <img alt="User Pic" src="<c:url value="/resources/icons/male.png"/> "
-                                                 class="img-circle img-responsive">
-                                        </c:if>
+                                        <c:choose>
 
-                                        <c:if test="${user.getSex().equals('female')}">
-                                            <img alt="User Pic" src="<c:url value="/resources/icons/female.png"/> "
-                                                 class="img-circle img-responsive">
-                                        </c:if>
+                                            <c:when test="${user.getSex().equals('male')}">
+                                                <img alt="User Pic" src="<c:url value="/resources/icons/male.png"/> "
+                                                     class="img-circle img-responsive">
+                                            </c:when>
+
+                                            <c:when test="${user.getSex().equals('female')}">
+                                                <img alt="User Pic" src="<c:url value="/resources/icons/female.png"/> "
+                                                     class="img-circle img-responsive">
+                                            </c:when>
+
+                                            <c:otherwise>
+                                                <img alt="User Pic" src="<c:url value="/resources/icons/unknown_user.png"/> "
+                                                     class="img-circle img-responsive">
+                                            </c:otherwise>
+
+                                        </c:choose>
 
                                     </div>
 
 
                                     <div class=" col-md-9 col-lg-9 ">
 
-                                        <form accept-charset="UTF-8" name="settings_form" action='<c:url value=""/>' method="POST" style="padding :15px;">
+                                        <form accept-charset="UTF-8" name="settings_form" action='<c:url value=""/>' method="POST">
 
                                             <!-- two radios -->
                                             <div id="radios">
                                                 <p>Choose your sex</p>
                                                 <br>
-                                                <c:if test="${user.getSex().equals('male')}">
-                                                    <label class="radio-inline" for="radio1">
-                                                        <input id="radio1" type="radio" name="sex" value="male" checked>male
-                                                    </label>
+                                                <c:choose>
 
-                                                    <label class="radio-inline" for="radio2">
-                                                        <input id="radio2" type="radio" name="sex" value="female">female
-                                                    </label>
-                                                </c:if>
+                                                    <c:when test="${user.getSex().equals('male')}">
+                                                        <label class="radio-inline" for="radio1">
+                                                            <input id="radio1" type="radio" name="sex" value="male" checked>male
+                                                        </label>
 
-                                                <c:if test="${user.getSex().equals('female')}">
+                                                        <label class="radio-inline" for="radio2">
+                                                            <input id="radio2" type="radio" name="sex" value="female">female
+                                                        </label>
+                                                    </c:when>
 
-                                                    <label class="radio-inline" for="radio1">
-                                                        <input id="radio1" type="radio" name="sex" value="male" checked>male
-                                                    </label>
+                                                    <c:when test="${user.getSex().equals('female')}">
 
-                                                    <label class="radio-inline" for="radio2">
-                                                        <input id="radio2" type="radio" name="sex" value="female" checked>female
-                                                    </label>
-                                                </c:if>
+                                                        <label class="radio-inline" for="radio1">
+                                                            <input id="radio1" type="radio" name="sex" value="male">male
+                                                        </label>
+
+                                                        <label class="radio-inline" for="radio2">
+                                                            <input id="radio2" type="radio" name="sex" value="female" checked>female
+                                                        </label>
+                                                    </c:when>
+
+                                                </c:choose>
                                             </div>
 
                                             <br>
@@ -162,28 +179,34 @@
                                                     </c:if>
                                                 </label>
                                             </div>
+
                                             <br>
 
+                                            <%--about user--%>
                                             <div class="form-group">
                                                 <label for="about">About yourself:</label>
-                                                <textarea  style="resize: none" name="about" class="form-control" rows="5" id="about" onkeyup="count(value)" maxlength="50"></textarea>
+                                                <textarea spellcheck="false" style="resize: none" name="about" class="form-control" rows="5" id="about" onkeyup="count(value)" maxlength="50"></textarea>
                                                 <p>symbols <b id="counter">0</b>/<b>50</b></p>
                                             </div>
 
                                             <br>
 
                                             <!-- submit button -->
-                                            <button type="submit" name="settings" value="settings" class="btn btn-primary btn-block">change</button>
+                                            <button type="submit" name="settings" value="settings" class="btn btn-primary btn-block">Save changes</button>
 
                                         </form>
 
                                     </div>
+
                                 </div>
+
                             </div>
 
                         </div>
 
                     </div>
+
+                    <div class=" col-sm-3"></div>
 
                     <!-- row ends -->
                 </div>
@@ -195,4 +218,5 @@
     </div>
 
 </body>
+
 </html>
