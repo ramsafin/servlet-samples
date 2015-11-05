@@ -23,7 +23,9 @@ public class PostServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
 
-        if (session.getAttribute("user_a") == null){
+        User u = (User) session.getAttribute("user_a");
+
+        if (u == null){
 
             Cookie cookie = ServletUtilities.getCookie(req,"remember");
 
@@ -54,7 +56,7 @@ public class PostServlet extends HttpServlet {
 
         }else {
 
-            req.setAttribute("user",session.getAttribute("user_a"));
+            req.setAttribute("user",u);
 
             //все посты всех юзеров
             List<Post> posts = new ArrayList<>();
@@ -68,9 +70,11 @@ public class PostServlet extends HttpServlet {
             }
 
             req.setAttribute("posts", posts);
+
             getServletContext().getRequestDispatcher("/WEB-INF/views/posts.jsp").forward(req, resp);
         }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -96,8 +100,9 @@ public class PostServlet extends HttpServlet {
             return;
         }
 
+
         //Ajax
-        String textForPost = req.getParameter("text");
+        String textForPost = req.getParameter("post");
 
         if ("".equals(textForPost) || textForPost == null){
             return;
@@ -123,10 +128,8 @@ public class PostServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-
 /* Old version without Ajax
         if ( "".equals(textForPost)  || textForPost == null){
-            req.setAttribute("message","write at least one symbol!");
             req.getServletContext().getRequestDispatcher("/WEB-INF/views/posts.jsp").forward(req,resp);
         }else {
 
@@ -166,4 +169,5 @@ public class PostServlet extends HttpServlet {
         }
         return "";
     }
+
 }

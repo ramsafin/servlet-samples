@@ -128,7 +128,7 @@
 
                                 <div class="row">
 
-                                    <form accept-charset="UTF-8" name="reg_form" action='<c:url value=""/>' onsubmit="return validate_form()" method="POST" style="padding :15px;">
+                                    <form id="form" accept-charset="UTF-8" name="reg_form" action='<c:url value=""/>' method="POST" style="padding :15px;">
 
                                         <!-- email field -->
                                         <div class="input-group">

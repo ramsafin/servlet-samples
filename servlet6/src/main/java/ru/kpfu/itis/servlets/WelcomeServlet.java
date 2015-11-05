@@ -32,7 +32,7 @@ public class WelcomeServlet extends HttpServlet {
                         UserRepository.updateUserCookie(user,newCookie);
                         resp.addCookie(newCookie);
                         session.setAttribute("user_a",user);
-                        resp.sendRedirect("/welcome");
+                        resp.sendRedirect(req.getRequestURI());
                         return;
                     }
 

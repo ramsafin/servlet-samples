@@ -1,3 +1,4 @@
+<%@ page import="ru.kpfu.itis.entities.Post" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <!DOCTYPE html>
@@ -13,7 +14,6 @@
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-2.1.4.min.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/resources/js/scroll.js"/> "></script>
 
-
     <script language="JavaScript">
         <%--add post with ajax--%>
         $(document).ready(function(){
@@ -27,7 +27,7 @@
                     return false;
                 }
 
-                $.post("<c:url value="/posts"/>", {"text":textForPost}, function(response){
+                $.post("<c:url value="/posts"/>", {"post":textForPost}, function(response){
                             $('textarea#text').val('');
                             $('#postPlace').append(
 
@@ -135,7 +135,7 @@
 
                                 <li>
                                     <form action="<c:url value=""/>" method="post" style="padding-right: 17px;">
-                                        <button  name="exit" value="exit" type="submit" class="btn btn-default navbar-btn"> Exit</button>
+                                        <button name="exit" value="exit" type="submit" class="btn btn-default navbar-btn btn-sm"> Exit</button>
                                     </form>
                                 </li>
                             </c:if>
@@ -182,9 +182,11 @@
                                 <div class="panel panel-default">
 
                                     <div class="panel-heading" >
+
                                         <h1 class="panel-title">
                                             <c:out value="${p.getUserName()}"/>
                                         </h1>
+
                                     </div>
 
                                     <%--posts text--%>
@@ -225,7 +227,7 @@
                                     <textarea spellcheck="false" style="resize: none" name="post" class="form-control" rows="5" id="text"></textarea>
                                 </div>
 
-                                <button  type="submit" id="myButton" class="btn btn-block btn-success">Send</button>
+                                <button type="submit" id="myButton" class="btn btn-block btn-success">Send</button>
 
                             </form>
 

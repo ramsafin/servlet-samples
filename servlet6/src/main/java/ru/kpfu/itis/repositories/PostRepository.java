@@ -28,12 +28,12 @@ public class PostRepository {
 
 
     //в разработке
-    public static void removePost(Post post) throws SQLException {
+    public static void removePost(int id) throws SQLException {
 
         String s = "delete from posts where id = ?";
         PreparedStatement p = Database.getConnection().prepareStatement(s);
 
-        p.setInt(1,post.getId());
+        p.setInt(1,id);
 
         p.executeUpdate();
     }

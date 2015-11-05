@@ -60,6 +60,9 @@ public class RegistrationServlet extends HttpServlet {
         String about = req.getParameter("about");
 
 
+        System.out.println();
+
+
         if (sex == null || "".equals(email) || "".equals(password) ){
 
             req.setAttribute("message","Fill all fields");

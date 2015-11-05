@@ -68,7 +68,7 @@
                             <%--exit from profile button--%>
                             <li>
                                 <form action="<c:url value=""/>" method="post">
-                                    <button  name="exit" value="exit" type="submit" class="btn btn-default navbar-btn"> Exit</button>
+                                    <button  name="exit" value="exit" type="submit" class="btn btn-default navbar-btn btn-sm"> Exit</button>
                                 </form>
                             </li>
 

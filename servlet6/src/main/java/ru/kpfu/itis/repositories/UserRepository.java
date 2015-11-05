@@ -172,4 +172,5 @@ public class UserRepository {
             throw new NotValidPasswordException("password is not valid: it must contain letters and digits");
         }
     }
+
 }
