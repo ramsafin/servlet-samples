@@ -60,8 +60,24 @@ public class RegistrationServlet extends HttpServlet {
         String about = req.getParameter("about");
 
 
-        System.out.println();
+        //ajax checking an email for free
+        String param = req.getParameter("ch_email");
+        if (param != null){
+            try {
+                resp.setCharacterEncoding("utf-8");
+                resp.setContentType("application/json");
 
+                if (UserRepository.getUserByEmail(param) != null){
+                    resp.getWriter().write("{\"param\" : \"1\"}");
+                }else {
+                    resp.getWriter().write("{\"param\" : \"0\"}");
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
 
         if (sex == null || "".equals(email) || "".equals(password) ){
 
