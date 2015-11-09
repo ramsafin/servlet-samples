@@ -11,6 +11,7 @@
 
     <title>ProfileSettings</title>
 
+    <script type="text/javascript" language="JavaScript" src="<c:url value="/resources/js/jquery-2.1.4.min.js"/> "></script>
     <script type="text/javascript" language="JavaScript" src="<c:url value="/resources/js/counter.js"/> "></script>
 
     <style type="text/css">
@@ -20,6 +21,7 @@
         .navbar-inverse{
             border-radius: 0;
         }
+
     </style>
 
 </head>
@@ -185,9 +187,14 @@
                                             <%--about user--%>
                                             <div class="form-group">
                                                 <label for="about">About yourself:</label>
-                                                <textarea spellcheck="false" style="resize: none" name="about" class="form-control" rows="5" id="about" onkeyup="count(value)" maxlength="50"></textarea>
-                                                <p>symbols <b id="counter">0</b>/<b>50</b></p>
+                                                <textarea spellcheck="false" style="resize: none" name="about" class="form-control" rows="5" id="about" maxlength="50"></textarea>
                                             </div>
+
+                                            <div class="progress" style="width: 50%;">
+                                                <div id="count" class="progress-bar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">0
+                                                </div>
+                                            </div>
+
 
                                             <br>
 

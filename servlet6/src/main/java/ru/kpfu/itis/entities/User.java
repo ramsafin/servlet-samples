@@ -105,19 +105,4 @@ public class User {
         return id;
     }
 
-    @Override
-    public String toString() {
-        return new StringBuilder()
-                .append("id = ").append(id)
-                .append("\nemail = ").append(email)
-                .append("\npassword = ").append(password)
-                .append("\nsalt = ").append(salt)
-                .append("\nsex = ").append(sex)
-                .append("\nsubscription = ").append(subscription)
-                .append("\nremember cookie = ").append(remember)
-                .append("\n-----about-----\n")
-                .append(about).append("\n")
-                .append("++++++++++++++++++++++++++++++++++++++++")
-                .toString();
-    }
 }

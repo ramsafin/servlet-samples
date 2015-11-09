@@ -146,7 +146,7 @@ public class UserRepository {
 
 
 
-    private static void checkUserEmail(String email) throws NotValidEmailException {
+    public static void checkUserEmail(String email) throws NotValidEmailException {
         Pattern pattern = Pattern.compile("^([a-zA-Z0-9_\\.\\+-]{1,63})" +
                 "@([a-zA-Z0-9-]+\\.[a-zA-Z]{2,})$");
         if (!pattern.matcher(email).matches()){

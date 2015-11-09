@@ -67,6 +67,8 @@ public class RegistrationServlet extends HttpServlet {
                 resp.setCharacterEncoding("utf-8");
                 resp.setContentType("application/json");
 
+                UserRepository.checkUserEmail(param);
+
                 if (UserRepository.getUserByEmail(param) != null){
                     resp.getWriter().write("{\"param\" : \"1\"}");
                 }else {
@@ -75,13 +77,15 @@ public class RegistrationServlet extends HttpServlet {
 
             } catch (SQLException e) {
                 e.printStackTrace();
+            } catch (NotValidEmailException e) {
+                resp.getWriter().write("{\"param\" : \"1\"}");
             }
             return;
         }
 
         if (sex == null || "".equals(email) || "".equals(password) ){
 
-            req.setAttribute("message","Fill all fields");
+            req.setAttribute("message","Fill all fields, please!");
 
         }else {
 
@@ -98,7 +102,7 @@ public class RegistrationServlet extends HttpServlet {
             } catch (SQLException e) {
                 //duplicate sql error code
                 if (e.getErrorCode() == 1062){
-                    req.setAttribute("message","user already exists");
+                    req.setAttribute("message","User already exists");
                 }
             } catch (SecurityException e) {
                 req.setAttribute("message","some problems in server(");

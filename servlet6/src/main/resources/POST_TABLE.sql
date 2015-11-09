@@ -5,6 +5,6 @@ create table posts
   `id` int not null primary key auto_increment,
   `text` nvarchar(500) not null,
   `date` DATETIME not null,
-  `user_id` int NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES users(id)
+  `userId` int NOT NULL,
+  FOREIGN KEY (userId) REFERENCES users(id)
 )

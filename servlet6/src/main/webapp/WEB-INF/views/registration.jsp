@@ -11,35 +11,17 @@
     <link href="<c:url value="/resources/styles/css/bootstrap-theme.css"/>" rel="stylesheet">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
+    <script type="text/javascript" language="JavaScript" src="<c:url value="/resources/js/jquery-2.1.4.min.js"/> "></script>
     <script type="text/javascript" language="JavaScript" src="<c:url value="/resources/js/counter.js"/> "></script>
     <script type="text/javascript" language="JavaScript" src="<c:url value="/resources/js/form_validate.js"/> "></script>
-    <script type="text/javascript" language="JavaScript" src="<c:url value="/resources/js/jquery-2.1.4.min.js"/> "></script>
+    <script type="text/javascript" language="JavaScript" src="<c:url value="/resources/js/password_check.js"/> "></script>
 
     <title>Registration</title>
 
     <%--ajax checking an email for available--%>
     <script language="JavaScript">
         $(document).ready(function () {
-            $('#email').keyup(function(){
-
-
-                $.post("<c:url value="/registration"/>", {"ch_email": $('#email').val()}, function(response){
-                            if(response.param == '0' && $('#email').val().length > 0){
-                                //available
-                                $('#email_msg').find('p').css("color","green").text('email is available');
-                            }else{
-                                //not available
-                                $('#email_msg').find('p').css("color","red").text('email is not available');
-                            }
-                        },
-
-                        'json'
-
-                ).fail(function (){
-                    alert("Sorry, can't send a post. Try again!");
-                })
-
-            }).blur(function(){
+            $('#email').blur(function(){
 
                 $.post("<c:url value="/registration"/>", {"ch_email": $('#email').val()}, function(response){
                             if(response.param == '0' && $('#email').val().length > 0){
@@ -137,7 +119,7 @@
             <div class="container">
 
                 <c:if test="${not empty message}">
-                    <p style="text-align: center">
+                    <p style="text-align: center; font-size: 12pt;">
                         <c:out value="${message}"/>
                     </p>
                 </c:if>
@@ -158,14 +140,14 @@
 
                                 <div class="row">
 
-                                    <form id="form" accept-charset="UTF-8" onsubmit="return validate_form()" name="reg_form" action='<c:url value=""/>' method="POST" style="padding :15px;">
+                                    <form id="form" accept-charset="UTF-8" onsubmit="return validate_form()" name="reg_form" action='<c:url value=""/>' method="POST" style="padding :20px;">
 
                                         <!-- email field -->
                                         <div class="input-group">
                                             <span class="input-group-addon" id="at-addon">@</span>
                                             <input id="email" type="text" name="email" class="form-control" placeholder="email@example.com">
                                         </div>
-
+                                        <br>
                                         <div id="email_msg" style="text-align: center; font-size: 12pt;" >
                                             <p></p>
                                         </div>
@@ -176,6 +158,10 @@
                                         <div class="form-group">
                                             <label for="password">Password</label>
                                             <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                                        </div>
+
+                                        <div id="pass_msg" style="text-align: center; font-size: 12pt;" >
+                                            <p></p>
                                         </div>
 
                                         <br>
@@ -203,8 +189,12 @@
 
                                         <div class="form-group">
                                             <label for="about">About yourself:</label>
-                                            <textarea style="resize: none" name="about" class="form-control" rows="5" id="about" onkeyup="count(value)" maxlength="50"></textarea>
-                                            <p>symbols <b id="counter">0</b>/<b>50</b></p>
+                                            <textarea spellcheck="false" style="resize: none" name="about" class="form-control" rows="5" id="about" maxlength="50"></textarea>
+                                        </div>
+
+                                        <div class="progress" style="width: 200px;">
+                                            <div id="count" class="progress-bar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">0
+                                            </div>
                                         </div>
 
                                         <br>

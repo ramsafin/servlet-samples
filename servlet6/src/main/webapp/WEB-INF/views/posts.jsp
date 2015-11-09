@@ -15,7 +15,8 @@
     <script type="text/javascript" src="<c:url value="/resources/js/scroll.js"/> "></script>
 
     <script language="JavaScript">
-        <%--add post with ajax--%>
+
+        <%--add post ajax--%>
         $(document).ready(function(){
 
             $('#myButton').click(function(e){
@@ -40,23 +41,20 @@
                                     "</div>"+
 
                                     "<div class='panel-body'>"+
-                                    "<p>"+ response.postText+"</p>"+
+                                    "<p>"+ response.postText + "</p>"+
                                     "</div>"+
 
                                     "<div class='panel-footer' style='padding-bottom:50px;'>"+
-
-                                    "<button class='submit pull-right btn btn-default well well-sm'>"+
-                                    "<span class='glyphicon glyphicon-thumbs-up'></span>"+
-                                    "<span id='likes'>0</span>"+
-                                    "</button>"+
 
                                     "<span class='pull-left'>"+
                                     "Published time : "+
                                             "<p>"+response.pTime+"</p>"+
                                     "</span>"+
+
+                                    "<div id='post_id' hidden>"+response.id+"</div>"+
                                     "</div>"
                             );
-                            $("html,body").animate({scrollTop:$(document).height()},"slow");
+                            $("html,body").animate({scrollTop:$(document).height()},"fast");
                         },
 
                         'json'
@@ -82,11 +80,6 @@
             border-radius: 0;
         }
 
-        #likes{
-            border-radius: 10px;
-            border-collapse: collapse;
-            outline: none;
-        }
     </style>
 
 </head>
@@ -197,16 +190,12 @@
                                     <%--information about post--%>
                                     <div class="panel-footer" style="padding-bottom:50px;">
 
-                                        <%-- Like --%>
-                                        <button id="likes" class="submit pull-right btn btn-default well well-sm">
-                                            <span class="glyphicon glyphicon-thumbs-up"></span>
-                                            <span id="likesCount">0</span>
-                                        </button>
-
                                         <%--date and time of publishing--%>
                                         <span class="pull-left">
                                             <p>Published time :<br> <c:out value="${p.getPublishedTime()}"/></p>
                                         </span>
+
+                                        <div id="post_id" hidden><c:out value="${p.getId()}"/></div>
 
                                     </div>
 
@@ -235,7 +224,7 @@
                             <br>
 
                             <c:if test="${not empty message}">
-                                <p style="text-align: center">
+                                <p style="text-align: center; font-size: 14pt;">
                                     <c:out value="${message}"/>
                                 </p>
                             </c:if>

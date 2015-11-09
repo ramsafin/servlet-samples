@@ -100,22 +100,22 @@ public class PostServlet extends HttpServlet {
             return;
         }
 
+        User user = (User)session.getAttribute("user_a");
 
-        //Ajax
+        //Ajax adding post
         String textForPost = req.getParameter("post");
-
         if ("".equals(textForPost) || textForPost == null){
             return;
         }
 
-        User user = (User)session.getAttribute("user_a");
 
         Post post = new Post(textForPost,user.getId());
         post.setUserName(user.getEmail());
 
         try {
-            PostRepository.addPost(post);
-            String data = getJSON(post);
+            int id = PostRepository.addPost(post);
+            post.setId(id);
+            String data = getPostJSON(post);
             if ("".equals(data)){
                 return;
             }
@@ -127,30 +127,9 @@ public class PostServlet extends HttpServlet {
             req.setAttribute("message","problems in server");
             e.printStackTrace();
         }
-
-/* Old version without Ajax
-        if ( "".equals(textForPost)  || textForPost == null){
-            req.getServletContext().getRequestDispatcher("/WEB-INF/views/posts.jsp").forward(req,resp);
-        }else {
-
-            try {
-                User user = (User)session.getAttribute("user_a");
-
-                Post post = new Post(textForPost,user.getId());
-                post.setUserName(user.getEmail());
-                PostRepository.addPost(post);
-                req.setAttribute("message","Post was successfully added)");
-                resp.sendRedirect("/posts");
-
-            } catch (SQLException e) {
-                req.setAttribute("message","Sorry, we can't publish your post(");
-                e.printStackTrace();
-            }
-        }
-*/
     }
 
-    private static String getJSON(Post post){
+    private static String getPostJSON(Post post){
 
         try(StringWriter sWriter  = new StringWriter()) {
 
@@ -159,9 +138,9 @@ public class PostServlet extends HttpServlet {
             obj.put("userName",post.getUserName());
             obj.put("postText",post.getText());
             obj.put("pTime",post.getPublishedTime());
+            obj.put("id",post.getId());
 
             obj.write(sWriter);
-
             return sWriter.toString();
 
         } catch (IOException e) {

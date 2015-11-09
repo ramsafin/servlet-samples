@@ -149,7 +149,7 @@
                                     <br>
 
                                     <c:if test="${not empty message}">
-                                        <p style="text-align: center">
+                                        <p style="text-align: center; font-size: 12pt;">
                                             <c:out value="${message}"/>
                                         </p>
                                     </c:if>
