@@ -21,14 +21,18 @@
 
             $('#myButton').click(function(e){
                 e.preventDefault();
-                var textForPost = $('textarea').val();
+                $(this).text("Waiting...");
+                $(this).attr("disabled", true);
 
+                var textForPost = $('textarea').val();
                 if( !textForPost ){
                     alert("Write down at least one symbol");
                     return false;
                 }
 
                 $.post("<c:url value="/posts"/>", {"post":textForPost}, function(response){
+                            $('#myButton').text("send").attr("disabled", false);
+
                             $('textarea#text').val('');
                             $('#postPlace').append(
 
@@ -60,6 +64,7 @@
                         'json'
 
                 ).fail(function (){
+                            $('#myButton').text("send").attr("disabled", false);
                             alert("Sorry, can't send a post. Try again!");
                         })
             });
