@@ -193,7 +193,7 @@
                                         </div>
 
                                         <div class="progress" style="width: 200px;">
-                                            <div id="count" class="progress-bar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">0
+                                            <div id="count" class="progress-bar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">0/50
                                             </div>
                                         </div>
 

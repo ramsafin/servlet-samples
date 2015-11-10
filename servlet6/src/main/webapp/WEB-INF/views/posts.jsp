@@ -75,12 +75,15 @@
     <title>posts</title>
 
     <style type="text/css">
+
         body{
             padding-top: 40px;
         }
+
         a{
             color : #fff;
         }
+
         .navbar-inverse{
             border-radius: 0;
         }
