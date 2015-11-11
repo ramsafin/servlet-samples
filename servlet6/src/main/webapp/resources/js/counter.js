@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    
+
     $("#about").keyup(function(){
 
         var box=$(this).val();

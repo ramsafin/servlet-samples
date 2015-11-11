@@ -11,36 +11,16 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
     <script>
-//        $(document).ready(function(){
-//            $('#myButton').click(function(){
-//
-//                $.getJSON('/ajaxServlet', {}, function(json){
-//                    $('h1').text(json.message.m1);
-//                });
-//                $('h1').css("text-align","center");
-//            })
-//        });
-
-
         $(document).ready(function(){
 
             $('#myButton').click(function(e){
                 e.preventDefault();
-
-                $.post("<c:url value="/ajaxTest"/>", {"text":$('textarea').val()}, function(json){
-                    $('textarea').empty();
-                    $('h1').text(json.post);
-                },
-
-                'json'
-
-                ).fail(function (){
-                    alert("fail(");
-                })
-
-            });
+                $.getJSON('post.json', {}, function(json){
+                    $('h1').text(json.data.p1+ "  " + json.data.p2);
+                });
+                $('h1').css("text-align","center");
+            })
         });
-
     </script>
 
     <title>Ajax Test</title>
@@ -50,14 +30,9 @@
 
     <h1></h1>
 
-    <form class="send-message" accept-charset="UTF-8" action="<c:url value=""/>" method="POST">
+    <form style="text-align: center" class="send-message" accept-charset="UTF-8" action="<c:url value=""/>" method="POST">
 
-        <div class="form-group">
-            <label class="well well-sm" for="text">Write a post:</label>
-            <textarea  style="resize: none" name="text" class="form-control" rows="5" id="text"></textarea>
-        </div>
-
-        <button  type="submit" id="myButton" class="btn btn-block btn-success">Отправить</button>
+        <button type="submit" id="myButton" class="btn btn-default well well-lg">Нажми меня пж</button>
 
     </form>
 
