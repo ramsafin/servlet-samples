@@ -1,28 +1,26 @@
 # My homeworks directory (servlets)
 
-###servlet
+### servlet
     The first homework(servlet directory)
     Task : to write two servlets
     the first should be a form with email, password, gender and checkbox (news) and write this data to the file data.txt
     the second shows this data.txt file as a table
     
     
-###servlet2
+### servlet2
     The second homework(servlet2 directory)
     Task : to write 2 servlet
     the RegistrationServlet - registration form servlet(with email etc.)
     the DataServlet - the servlet that show us a table of users who has already added to 'Database'
     
-###servlet3
+### servlet3
     The third homework(servlet3 directory)
     Task to write 2 servlets
     Registration and Information
     and use JSP
-###servlet4
-    wrtite 3 servlets (authentication, profile, registration)
-    
-###servlet 6    
-    you will see ...
-    
+
+### servlet4
+    Wrtite 3 servlets (authentication, profile, registration)
+
     
     
